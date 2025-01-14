@@ -1,0 +1,33 @@
+.wrapper {
+  display: flex;
+  height: 100vh;
+  background: #f4f4f7;
+}
+
+.formSection {
+  flex: 1;
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #ffffff;
+}
+
+.imageSection {
+  flex: 1;
+  background: linear-gradient(135deg, #4f46e5, #3b82f6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.heading {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.link {
+  color: #3b82f6;
+  text-decoration: underline;
+  cursor: pointer;
+}
