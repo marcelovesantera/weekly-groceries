@@ -1,18 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import LoginPage from "./auth/login/page";
+import { redirect } from "next/navigation";
 
 export default function HomePage() {
-  const [isLogged, setIsLogged] = useState(false);
+  const [isLogged, setIsLogged] = useState(true);
+  console.log(setIsLogged);
 
-  return (
-    <div>
-      {isLogged ? (
-        <div>Dashboard</div>
-      ) : (
-        <LoginPage setIsLogged={setIsLogged} />
-      )}
-    </div>
-  );
+  return <div>{isLogged ? <div>Dashboard</div> : redirect("/login")}</div>;
 }

@@ -84,13 +84,13 @@ const LoginPage = ({ setIsLogged }: Props) => {
 
           <p className={styles.text_link}>
             Não tem uma conta?{" "}
-            <Link className={styles.link} href="/auth/register">
+            <Link className={styles.link} href="/register">
               Cadastre-se
             </Link>
           </p>
           <p className={styles.text_link}>
             Esqueceu sua senha?{" "}
-            <Link className={styles.link} href="/auth/forgot-password">
+            <Link className={styles.link} href="/forgot-password">
               Recuperar senha
             </Link>
           </p>

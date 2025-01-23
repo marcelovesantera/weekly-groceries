@@ -141,13 +141,13 @@ const RegisterPage = () => {
 
           <p className={styles.text_link}>
             Já tem uma conta?{" "}
-            <Link className={styles.link} href="/auth/login">
+            <Link className={styles.link} href="/login">
               Faça login
             </Link>
           </p>
           <p className={styles.text_link}>
             Esqueceu sua senha?{" "}
-            <Link className={styles.link} href="/auth/forgot-password">
+            <Link className={styles.link} href="/forgot-password">
               Recuperar senha
             </Link>
           </p>

@@ -62,13 +62,13 @@ const ForgotPasswordPage = () => {
 
           <p className={styles.text_link}>
             Já tem uma conta?{" "}
-            <Link className={styles.link} href="/auth/login">
+            <Link className={styles.link} href="/login">
               Faça login
             </Link>
           </p>
           <p className={styles.text_link}>
             Não tem uma conta?{" "}
-            <Link className={styles.link} href="/auth/register">
+            <Link className={styles.link} href="/register">
               Cadastre-se
             </Link>
           </p>
