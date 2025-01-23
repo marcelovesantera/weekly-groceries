@@ -1,10 +1,18 @@
-import Link from "next/link";
+"use client";
+
+import { useState } from "react";
+import LoginPage from "./auth/login/page";
 
 export default function HomePage() {
+  const [isLogged, setIsLogged] = useState(false);
+
   return (
     <div>
-      <h1>Bem-vindo ao Weekly Groceries!</h1>
-      <Link href="/auth/login">Vá para o Login</Link>
+      {isLogged ? (
+        <div>Dashboard</div>
+      ) : (
+        <LoginPage setIsLogged={setIsLogged} />
+      )}
     </div>
   );
 }

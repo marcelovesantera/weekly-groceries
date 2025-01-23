@@ -6,7 +6,11 @@ import Link from "next/link";
 import InputField from "@/app/Components/Auth/input-field";
 import SubmitBtn from "@/app/Components/Auth/submit-btn";
 
-const LoginPage = () => {
+type Props = {
+  setIsLogged: (value: boolean) => void;
+};
+
+const LoginPage = ({ setIsLogged }: Props) => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const emailType = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -37,6 +41,7 @@ const LoginPage = () => {
       onValidateInput(password, "password")
     ) {
       console.log("Login efetuado com sucesso");
+      setIsLogged(true);
     } else {
       console.log("Email ou senha inválidos");
     }
