@@ -2,6 +2,7 @@
 
 import styles from "./page.module.css";
 import { useState } from "react";
+import { redirect } from "next/navigation";
 import InputField from "@/app/Components/Auth/input-field";
 import SubmitBtn from "@/app/Components/Auth/submit-btn";
 import Link from "next/link";
@@ -16,6 +17,8 @@ type NewRegister = {
 };
 
 const RegisterPage = () => {
+  const isLogged = true;
+
   const [register, setRegister] = useState<NewRegister>({});
 
   const emailType = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -65,94 +68,104 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className={styles.page}>
-      <div className={styles.container}>
-        <div className={styles.form_div}>
-          <div className={styles.text_div}>
-            <h4 className={styles.text}>
-              Cadastre-se no <b>Weekly Groceries!</b>
-            </h4>
-          </div>
+    <div>
+      {isLogged ? (
+        <div className={styles.page}>
+          <div className={styles.container}>
+            <div className={styles.form_div}>
+              <div className={styles.text_div}>
+                <h4 className={styles.text}>
+                  Cadastre-se no <b>Weekly Groceries!</b>
+                </h4>
+              </div>
 
-          <div className={styles.items_div}>
-            <span className={styles.input_text}>Nome:</span>
-            <InputField
-              type="text"
-              name="name"
-              setValue={(name: string) => setRegister({ ...register, name })}
-            />
-          </div>
-          <div className={styles.items_div}>
-            <span className={styles.input_text}>Sobrenome:</span>
-            <InputField
-              type="text"
-              name="lastname"
-              setValue={(lastname: string) =>
-                setRegister({ ...register, lastname })
-              }
-            />
-          </div>
-          <div className={styles.items_div}>
-            <span className={styles.input_text}>Email:</span>
-            <InputField
-              type="email"
-              described="emailHelp"
-              name="email"
-              setValue={(email: string) => setRegister({ ...register, email })}
-            />
-          </div>
-          <div className={styles.items_div}>
-            <span className={styles.input_text}>WhatsApp:</span>
-            <InputField
-              type="whatsapp"
-              name="whatsapp"
-              setValue={(whatsapp: string) =>
-                setRegister({ ...register, whatsapp })
-              }
-            />
-          </div>
-          <div className={styles.items_div}>
-            <span className={styles.input_text}>Senha:</span>
-            <InputField
-              type="password"
-              name="password"
-              setValue={(password: string) =>
-                setRegister({ ...register, password })
-              }
-            />
-          </div>
-          <div className={styles.items_div}>
-            <span className={styles.input_text}>Confirme sua senha:</span>
-            <InputField
-              type="password"
-              name="confirmPassword"
-              setValue={(confirmPassword: string) =>
-                setRegister({ ...register, confirmPassword })
-              }
-            />
-          </div>
+              <div className={styles.items_div}>
+                <span className={styles.input_text}>Nome:</span>
+                <InputField
+                  type="text"
+                  name="name"
+                  setValue={(name: string) =>
+                    setRegister({ ...register, name })
+                  }
+                />
+              </div>
+              <div className={styles.items_div}>
+                <span className={styles.input_text}>Sobrenome:</span>
+                <InputField
+                  type="text"
+                  name="lastname"
+                  setValue={(lastname: string) =>
+                    setRegister({ ...register, lastname })
+                  }
+                />
+              </div>
+              <div className={styles.items_div}>
+                <span className={styles.input_text}>Email:</span>
+                <InputField
+                  type="email"
+                  described="emailHelp"
+                  name="email"
+                  setValue={(email: string) =>
+                    setRegister({ ...register, email })
+                  }
+                />
+              </div>
+              <div className={styles.items_div}>
+                <span className={styles.input_text}>WhatsApp:</span>
+                <InputField
+                  type="whatsapp"
+                  name="whatsapp"
+                  setValue={(whatsapp: string) =>
+                    setRegister({ ...register, whatsapp })
+                  }
+                />
+              </div>
+              <div className={styles.items_div}>
+                <span className={styles.input_text}>Senha:</span>
+                <InputField
+                  type="password"
+                  name="password"
+                  setValue={(password: string) =>
+                    setRegister({ ...register, password })
+                  }
+                />
+              </div>
+              <div className={styles.items_div}>
+                <span className={styles.input_text}>Confirme sua senha:</span>
+                <InputField
+                  type="password"
+                  name="confirmPassword"
+                  setValue={(confirmPassword: string) =>
+                    setRegister({ ...register, confirmPassword })
+                  }
+                />
+              </div>
 
-          <div className={styles.items_div}>
-            <SubmitBtn
-              text="Registrar"
-              onClick={() => onHandleRegister(register)}
-            />
-          </div>
+              <div className={styles.items_div}>
+                <SubmitBtn
+                  text="Registrar"
+                  onClick={() => onHandleRegister(register)}
+                />
+              </div>
 
-          <p className={styles.text_link}>
-            Já tem uma conta?{" "}
-            <Link className={styles.link} href="/login">
-              Faça login
-            </Link>
-          </p>
-          <p className={styles.text_link}>
-            Esqueceu sua senha?{" "}
-            <Link className={styles.link} href="/forgot-password">
-              Recuperar senha
-            </Link>
-          </p>
+              <p className={styles.text_link}>
+                Já tem uma conta?{" "}
+                <Link className={styles.link} href="/login">
+                  Faça login
+                </Link>
+              </p>
+              <p className={styles.text_link}>
+                Esqueceu sua senha?{" "}
+                <Link className={styles.link} href="/forgot-password">
+                  Recuperar senha
+                </Link>
+              </p>
+            </div>
+          </div>
         </div>
-      </div>
+      ) : (
+        redirect("/")
+      )}
     </div>
   );
 };
