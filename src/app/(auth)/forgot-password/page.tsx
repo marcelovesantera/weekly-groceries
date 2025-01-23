@@ -2,11 +2,14 @@
 
 import styles from "./page.module.css";
 import { useState } from "react";
+import { redirect } from "next/navigation";
 import InputField from "@/app/Components/Auth/input-field";
 import SubmitBtn from "@/app/Components/Auth/submit-btn";
 import Link from "next/link";
 
 const ForgotPasswordPage = () => {
+  const isLogged = true;
+
   const [email, setEmail] = useState<string>("");
   const emailType = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -34,46 +37,52 @@ const ForgotPasswordPage = () => {
   };
 
   return (
-    <div className={styles.page}>
-      <div className={styles.container}>
-        <div className={styles.form_div}>
-          <div className={styles.text_div}>
-            <h4 className={styles.text}>
-              Recuperar senha no <b>Weekly Groceries!</b>
-            </h4>
-          </div>
+    <div>
+      {isLogged ? (
+        <div className={styles.page}>
+          <div className={styles.container}>
+            <div className={styles.form_div}>
+              <div className={styles.text_div}>
+                <h4 className={styles.text}>
+                  Recuperar senha no <b>Weekly Groceries!</b>
+                </h4>
+              </div>
 
-          <div className={styles.items_div}>
-            <InputField
-              type="email"
-              described="emailHelp"
-              placeholder="Digite o seu email..."
-              name="email"
-              setValue={setEmail}
-            />
-          </div>
+              <div className={styles.items_div}>
+                <InputField
+                  type="email"
+                  described="emailHelp"
+                  placeholder="Digite o seu email..."
+                  name="email"
+                  setValue={setEmail}
+                />
+              </div>
 
-          <div className={styles.items_div}>
-            <SubmitBtn
-              text="Recuperar senha"
-              onClick={() => onHandleSubmit(email)}
-            />
-          </div>
+              <div className={styles.items_div}>
+                <SubmitBtn
+                  text="Recuperar senha"
+                  onClick={() => onHandleSubmit(email)}
+                />
+              </div>
 
-          <p className={styles.text_link}>
-            Já tem uma conta?{" "}
-            <Link className={styles.link} href="/login">
-              Faça login
-            </Link>
-          </p>
-          <p className={styles.text_link}>
-            Não tem uma conta?{" "}
-            <Link className={styles.link} href="/register">
-              Cadastre-se
-            </Link>
-          </p>
+              <p className={styles.text_link}>
+                Já tem uma conta?{" "}
+                <Link className={styles.link} href="/login">
+                  Faça login
+                </Link>
+              </p>
+              <p className={styles.text_link}>
+                Não tem uma conta?{" "}
+                <Link className={styles.link} href="/register">
+                  Cadastre-se
+                </Link>
+              </p>
+            </div>
+          </div>
         </div>
-      </div>
+      ) : (
+        redirect("/")
+      )}
     </div>
   );
 };
