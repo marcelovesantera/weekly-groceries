@@ -24,22 +24,38 @@
   width: 90%;
 }
 
-.grid_planejamento {
-  width: 100%;
+.grid {
+  display: flex;
+  flex-direction: column;
+  /* gap: 1rem;
+  padding: 1rem; */
   border-radius: 10px;
   box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
 }
 
+/* RECEITAS */
+.grid_receitas {
+  width: 20%;
+}
+
+/* PLANEJAMENTO */
+.grid_planejamento {
+  width: 100%;
+}
+
+.row {
+  width: 100%;
+}
+
 .grid_header {
   display: flex;
-  padding: 1rem 1rem;
+  padding: 1rem;
+  background-color: #eff1f5;
   border-radius: 10px 10px 0px 0px;
-  background-color: #f8f9fc;
   border-bottom: 1px solid #e3e6f0;
 }
 
 .grid_title {
-  padding: 0.5rem 0rem;
   font-size: 1rem;
   font-weight: 700;
   color: rgb(78, 115, 223);
@@ -48,49 +64,34 @@
 .grid_days {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  border-radius: 0px 0px 10px 10px;
-  background-color: #fff;
+  gap: 1rem;
+  padding: 2rem 1rem 1rem 1rem;
 }
 
-/* colunas dos dias da semana */
-/* .table_header {
+.grid_titles {
   display: flex;
-  width: 100%;
-  padding: 0.8rem 1rem;
+  gap: 1rem;
 }
 
 .days {
   width: 100%;
-} */
+}
 
-/* colunas das receitas */
-.grid_days_food {
+.grid_portions {
   display: flex;
-  width: 100%;
-  padding: 0rem 1rem;
-}
+  gap: 1rem;
+  padding: 0.5rem 0;
 
-.table_food {
-  width: 100%;
-}
-
-.column_portions {
-  display: flex;
-  flex-direction: column;
-}
-
-.days {
-  width: 100%;
-  padding: 0.8rem 0rem;
-}
-
-/* item receita */
-.portion_div {
-  display: flex;
-  align-items: center;
-  padding: 0.8rem 0rem;
   border-top: 1px solid #e3e6f0;
+}
+
+.portion {
+  display: flex;
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 4px;
+  background-color: #eff1f5;
+  box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
 }
 
 .receita_img_div {
@@ -103,7 +104,6 @@
   border-radius: 50% !important;
   height: 2rem;
   width: 2rem;
-
   object-fit: cover;
 }
 
@@ -117,22 +117,9 @@
   color: #2d2d2f !important;
   font-size: 0.875em;
   font-weight: 700;
-  /* white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis; */
-
-  /* max-width: 100%; */
 }
 
 .portion_text {
   color: #858796 !important;
   font-size: 0.6em;
-}
-
-/* receitas */
-.grid_receitas {
-  width: 30%;
-  border-radius: 10px;
-  background-color: #f8f9fc;
-  box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
 }
