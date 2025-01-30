@@ -1,382 +1,268 @@
 "use client";
 
 import styles from "./page.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { redirect } from "next/navigation";
 import NavigationBar from "./Components/Dashboard/navigation-bar";
 import ActionBtn from "./Components/Dashboard/action-btn";
 import Image, { StaticImageData } from "next/image";
 import receitaImg from "@/app/Images/receitaRef.jpg";
 
-type Receita = {
-  day: string;
-  receita: {
-    title: string;
-    porcoes: number;
-    img: StaticImageData;
-  };
+type Food = {
+  title: string;
+  type: string;
+  portions: number;
+  img: StaticImageData;
 };
 
-type ReceitaRow = Receita[];
+type DayPlan = {
+  day: string;
+  breakfast: Food[];
+  lunch: Food[];
+  snack: Food[];
+  dinner: Food[];
+};
+
+const cleanPlan: DayPlan[] = [
+  {
+    day: "Segunda",
+    breakfast: [],
+    lunch: [],
+    snack: [],
+    dinner: [],
+  },
+  {
+    day: "Terça",
+    breakfast: [],
+    lunch: [],
+    snack: [],
+    dinner: [],
+  },
+  {
+    day: "Quarta",
+    breakfast: [],
+    lunch: [],
+    snack: [],
+    dinner: [],
+  },
+  {
+    day: "Quinta",
+    breakfast: [],
+    lunch: [],
+    snack: [],
+    dinner: [],
+  },
+  {
+    day: "Sexta",
+    breakfast: [],
+    lunch: [],
+    snack: [],
+    dinner: [],
+  },
+  {
+    day: "Sábado",
+    breakfast: [],
+    lunch: [],
+    snack: [],
+    dinner: [],
+  },
+  {
+    day: "Domingo",
+    breakfast: [],
+    lunch: [],
+    snack: [],
+    dinner: [],
+  },
+];
+
+const plan: DayPlan[] = [
+  {
+    day: "Segunda",
+    breakfast: [
+      {
+        title: "Torrada com Ovo",
+        type: "Café da Manhã",
+        portions: 2,
+        img: receitaImg,
+      },
+    ],
+    lunch: [
+      {
+        title: "Frango com Batata",
+        type: "Almoço",
+        portions: 2,
+        img: receitaImg,
+      },
+    ],
+    snack: [],
+    dinner: [],
+  },
+  {
+    day: "Terça",
+    breakfast: [],
+    lunch: [
+      {
+        title: "Frango com Batata",
+        type: "Almoço",
+        portions: 2,
+        img: receitaImg,
+      },
+    ],
+    snack: [],
+    dinner: [],
+  },
+  {
+    day: "Quarta",
+    breakfast: [
+      {
+        title: "Torrada com Ovo",
+        type: "Café da Manhã",
+        portions: 2,
+        img: receitaImg,
+      },
+    ],
+    lunch: [
+      {
+        title: "Frango com Batata",
+        type: "Almoço",
+        portions: 2,
+        img: receitaImg,
+      },
+    ],
+    snack: [],
+    dinner: [],
+  },
+  {
+    day: "Quinta",
+    breakfast: [],
+    lunch: [
+      {
+        title: "Frango com Batata",
+        type: "Almoço",
+        portions: 2,
+        img: receitaImg,
+      },
+    ],
+    snack: [],
+    dinner: [],
+  },
+  {
+    day: "Sexta",
+    breakfast: [],
+    lunch: [
+      {
+        title: "Frango com Batata",
+        type: "Almoço",
+        portions: 2,
+        img: receitaImg,
+      },
+    ],
+    snack: [],
+    dinner: [],
+  },
+  {
+    day: "Sábado",
+    breakfast: [],
+    lunch: [
+      {
+        title: "Frango com Batata",
+        type: "Almoço",
+        portions: 2,
+        img: receitaImg,
+      },
+    ],
+    snack: [],
+    dinner: [],
+  },
+  {
+    day: "Domingo",
+    breakfast: [
+      {
+        title: "Torrada com Ovo",
+        type: "Café da Manhã",
+        portions: 2,
+        img: receitaImg,
+      },
+    ],
+    lunch: [
+      {
+        title: "Frango com Batata",
+        type: "Almoço",
+        portions: 2,
+        img: receitaImg,
+      },
+    ],
+    snack: [],
+    dinner: [],
+  },
+];
 
 export default function HomePage() {
-  const [isLogged, setIsLogged] = useState(true);
+  const [isLogged, setIsLogged] = useState<boolean>(true);
   console.log(setIsLogged);
+  const [planning, setPlanning] = useState<DayPlan[]>(plan);
 
-  const row1: ReceitaRow = [
-    {
-      day: "Segunda",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-    {
-      day: "Terça",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-    {
-      day: "Quarta",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-    {
-      day: "Quinta",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-    {
-      day: "Sexta",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-    {
-      day: "Sábado",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-    {
-      day: "Domingo",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-  ];
+  const onClickNewPlan = () => {
+    const newPlan: DayPlan[] = cleanPlan;
+    setPlanning(newPlan);
+    onRenderGrids(newPlan);
+    onRenderReceitas();
+  };
 
-  const row2: ReceitaRow = [
-    {
-      day: "Segunda",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-    {
-      day: "Terça",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-    {
-      day: "Quarta",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-    {
-      day: "Quinta",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-    {
-      day: "Sexta",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-    {
-      day: "Sábado",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-    {
-      day: "Domingo",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-  ];
-
-  const row3: ReceitaRow = [
-    {
-      day: "Segunda",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-    {
-      day: "Terça",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-    {
-      day: "Quarta",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-    {
-      day: "Quinta",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-    {
-      day: "Sexta",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-    {
-      day: "Sábado",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-    {
-      day: "Domingo",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-  ];
-
-  const row4: ReceitaRow = [
-    {
-      day: "Segunda",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-    {
-      day: "Terça",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-    {
-      day: "Quarta",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-    {
-      day: "Quinta",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-    {
-      day: "Sexta",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-    {
-      day: "Sábado",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-    {
-      day: "Domingo",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-  ];
-
-  const row5: ReceitaRow = [
-    {
-      day: "Segunda",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-    {
-      day: "Terça",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-    {
-      day: "Quarta",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-    {
-      day: "Quinta",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-    {
-      day: "Sexta",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-    {
-      day: "Sábado",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-    {
-      day: "Domingo",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-  ];
-
-  const plan = [row1, row2, row3, row4, row5];
-
-  const onRenderGridRow = (item: Receita, index: number) => {
+  const onRenderGridRow = (item: Food, index: number) => {
     return (
-      <div key={index} className={styles.portion}>
-        <div className={styles.receita_img_div}>
-          <Image
-            className={styles.receita_img}
-            src={item.receita.img}
-            alt="Receita Icone"
-          />
+      <div key={index} className={`${styles.row} ${styles.grid_days}`}>
+        <div className={`${styles.title_div}`}>
+          <div className={`${styles.receita_img_div}`}>
+            <Image
+              className={styles.receita_img}
+              src={item.img}
+              alt="Receita Icone"
+            />
+          </div>
+          <p className={`${styles.receita_title}`}>{item.title}</p>
         </div>
-        <div className={styles.receita_info_div}>
-          <p className={styles.receita_title}>{item.receita.title}</p>
-          <span
-            className={styles.portion_text}
-          >{`Porções: ${item.receita.porcoes}x`}</span>
+        <span className={`${styles.portion_text} ${styles.num_portions}`}>
+          {item.portions}x
+        </span>
+        <span className={`${styles.type_text} ${styles.type}`}>
+          {item.type}
+        </span>
+        <div className={`${styles.btn}`}>
+          <button className={`${styles.btn_edit}`}>Editar</button>
+        </div>
+        <div className={`${styles.btn}`}>
+          <button className={`${styles.btn_remove}`}>Remover</button>
         </div>
       </div>
     );
   };
 
-  const onRenderPlanning = () => {
-    const stylePortions = `${styles.row} ${styles.grid_portions}`;
-
+  const onRenderGrids = (inputPlan: DayPlan[]) => {
     return (
-      <div>
-        {plan.map((row, rowIndex) => (
-          <div key={rowIndex} className={stylePortions}>
-            {row.map((item, itemIndex) => onRenderGridRow(item, itemIndex))}
+      <div className={`${styles.grid_plan}`}>
+        {inputPlan.map((item: DayPlan, index: number) => (
+          <div key={index} className={`${styles.grid} ${styles.grid_plan_day}`}>
+            <div className={`${styles.row} ${styles.grid_header}`}>
+              <p className={styles.grid_title}>{item.day}</p>
+            </div>
+            <div className={`${styles.row} ${styles.grid_foods}`}>
+              <div className={`${styles.row} ${styles.grid_columns}`}>
+                <h4 className={`${styles.title}`}>Receita</h4>
+                <h4 className={`${styles.num_portions}`}>Porções</h4>
+                <h4 className={`${styles.type}`}>Tipo</h4>
+                <h4 className={`${styles.btn}`}> </h4>
+                <h4 className={`${styles.btn}`}> </h4>
+              </div>
+              {item.breakfast.map((food, index) =>
+                onRenderGridRow(food, index)
+              )}
+              {item.lunch.map((food, index) => onRenderGridRow(food, index))}
+              {item.snack.map((food, index) => onRenderGridRow(food, index))}
+              {item.dinner.map((food, index) => onRenderGridRow(food, index))}
+            </div>
           </div>
         ))}
-      </div>
-    );
-  };
-
-  const onRenderGrid = () => {
-    const styleGrid = `${styles.grid} ${styles.grid_planejamento}`;
-    const styleHeader = `${styles.row} ${styles.grid_header}`;
-    const styleDays = `${styles.row} ${styles.grid_days}`;
-    const styleTitles = `${styles.row} ${styles.grid_titles}`;
-
-    return (
-      <div className={styleGrid}>
-        <div className={styleHeader}>
-          <p className={styles.grid_title}>Planejamento Semanal</p>
-        </div>
-        <div className={styleDays}>
-          <div className={styleTitles}>
-            <h4 className={styles.days}>Segunda</h4>
-            <h4 className={styles.days}>Terça</h4>
-            <h4 className={styles.days}>Quarta</h4>
-            <h4 className={styles.days}>Quinta</h4>
-            <h4 className={styles.days}>Sexta</h4>
-            <h4 className={styles.days}>Sábado</h4>
-            <h4 className={styles.days}>Domingo</h4>
-          </div>
-          {onRenderPlanning()}
-        </div>
       </div>
     );
   };
@@ -394,31 +280,38 @@ export default function HomePage() {
     );
   };
 
-  const onRenderDashboard = () => {
+  const onRenderDashboard = (inputPlan: DayPlan[]) => {
     return (
       <>
-        <NavigationBar />
         <section className={styles.btns_section}>
-          <ActionBtn
-            text="Novo Planejamento"
-            onClick={() => console.log("Novo Planejamento")}
-          />
+          <ActionBtn text="Novo Planejamento" onClick={onClickNewPlan} />
           <ActionBtn
             text="Minhas Receita"
             onClick={() => console.log("Minhas Receita")}
           />
         </section>
         <section className={styles.grids_section}>
-          {onRenderGrid()}
+          {onRenderGrids(inputPlan)}
           {onRenderReceitas()}
         </section>
       </>
     );
   };
 
+  useEffect(() => {
+    onRenderDashboard(plan);
+  }, []);
+
   return (
-    <div className={styles.body_div}>
-      {isLogged ? onRenderDashboard() : redirect("/login")}
-    </div>
+    <>
+      {isLogged ? (
+        <div className={styles.page}>
+          <NavigationBar />
+          <div className={styles.body_div}>{onRenderDashboard(planning)}</div>
+        </div>
+      ) : (
+        redirect("/login")
+      )}
+    </>
   );
 }
