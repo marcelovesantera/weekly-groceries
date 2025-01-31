@@ -1,10 +1,10 @@
 import { StaticImageData } from "next/image";
 
-export interface IFood {
+export interface IRecipe {
   id: number;
   title: string;
   type: string;
-  portions: number;
+  portions?: number;
   portionsMax: number;
   img: StaticImageData;
 }

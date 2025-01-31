@@ -1,11 +1,11 @@
 import React from "react";
-import styles from "./receita-card.module.css";
-import { IFood } from "@/shared/interfaces/food";
+import styles from "./recipe-card.module.css";
+import { IRecipe } from "@/shared/interfaces/recipe";
 import Image from "next/image";
 import { Trash2 } from "lucide-react";
 
 type Props = {
-  receita: IFood;
+  receita: IRecipe;
   onRemoveReceita: (id: number) => void;
 };
 const ReceitaCard = ({ receita, onRemoveReceita }: Props) => {

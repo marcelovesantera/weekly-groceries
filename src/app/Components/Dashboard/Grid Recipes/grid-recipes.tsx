@@ -1,35 +1,20 @@
 import React from "react";
-import styles from "./grid-receitas.module.css";
-import { IFood } from "@/shared/interfaces/food";
-import ReceitaCard from "./receita-card";
-import ActionBtn from "./action-btn";
-import receitaImg from "@/app/Images/receitaRef.jpg";
+import styles from "./grid-recipes.module.css";
+import { IRecipe } from "@/shared/interfaces/recipe";
+import ReceitaCard from "../Recipe Card/recipe-card";
+import ActionBtn from "../Action Button/action-btn";
 import { Plus } from "lucide-react";
 
 type Props = {
-  receitas: IFood[];
-  setReceitas: (receitas: IFood[]) => void;
+  receitas: IRecipe[];
+  setReceitas: (receitas: IRecipe[]) => void;
+  setIsModalOpen: (isOpen: boolean) => void;
 };
 
-const GridReceitas = ({ receitas, setReceitas }: Props) => {
+const GridReceitas = ({ receitas, setReceitas, setIsModalOpen }: Props) => {
   const onRemoveReceita = (id: number) => {
     const updatedReceitas = receitas.filter((receita) => receita.id !== id);
     setReceitas(updatedReceitas);
-  };
-
-  const onAddReceita = () => {
-    const listaReceitas = [...receitas];
-    const newReceita: IFood = {
-      id: listaReceitas.length + 1,
-      title: "Receita Adicionada",
-      type: "Almoço",
-      portions: 2,
-      portionsMax: 4,
-      img: receitaImg,
-    };
-    listaReceitas.push(newReceita);
-
-    setReceitas(listaReceitas);
   };
 
   return (
@@ -41,7 +26,7 @@ const GridReceitas = ({ receitas, setReceitas }: Props) => {
         <div className={`${styles.grid_list}`}>
           <ActionBtn
             type="button"
-            onClick={() => onAddReceita()}
+            onClick={() => setIsModalOpen(true)}
             icon={<Plus size={16} />}
           />
         </div>

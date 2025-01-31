@@ -1,9 +1,9 @@
-import { IFood } from "./food";
+import { IRecipe } from "./recipe";
 
 export interface IDayPlan {
   day: string;
-  breakfast: IFood[];
-  lunch: IFood[];
-  snack: IFood[];
-  dinner: IFood[];
+  breakfast: IRecipe[];
+  lunch: IRecipe[];
+  snack: IRecipe[];
+  dinner: IRecipe[];
 }

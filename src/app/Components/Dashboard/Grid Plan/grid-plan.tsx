@@ -1,15 +1,36 @@
 import styles from "./grid-plan.module.css";
 import Image from "next/image";
 import { IWeeklyPlan } from "@/shared/interfaces/weeklyPlan";
-import { IFood } from "@/shared/interfaces/food";
+import { IRecipe } from "@/shared/interfaces/recipe";
 import { IDayPlan } from "@/shared/interfaces/dayPlan";
 
 type Props = {
   plan: IWeeklyPlan;
+  planning: IWeeklyPlan;
+  setPlanning: (planning: IWeeklyPlan) => void;
 };
 
-const GridPlan = ({ plan }: Props) => {
-  const onRenderGridRow = (item: IFood, index: number) => {
+const GridPlan = ({ plan, planning, setPlanning }: Props) => {
+  const onRemoveReceita = (id: number, day: string) => {
+    const updatedDay: IDayPlan =
+      planning[day.toLowerCase() as keyof IWeeklyPlan];
+
+    const updatedDayPlan: IDayPlan = {
+      ...updatedDay,
+      breakfast: updatedDay.breakfast.filter((food) => food.id !== id),
+      lunch: updatedDay.lunch.filter((food) => food.id !== id),
+      snack: updatedDay.snack.filter((food) => food.id !== id),
+      dinner: updatedDay.dinner.filter((food) => food.id !== id),
+    };
+
+    const updatedPlanning: IWeeklyPlan = {
+      ...planning,
+      [day.toLowerCase()]: updatedDayPlan,
+    };
+    setPlanning(updatedPlanning);
+  };
+
+  const onRenderGridRow = (item: IRecipe, index: number, day: string) => {
     return (
       <div key={index} className={`${styles.row} ${styles.grid_days}`}>
         <div className={`${styles.title_div}`}>
@@ -39,7 +60,7 @@ const GridPlan = ({ plan }: Props) => {
         <div className={`${styles.btn}`}>
           <button
             className={`${styles.btn_remove}`}
-            onClick={() => console.log("Remover")}
+            onClick={() => onRemoveReceita(item.id, day)}
           >
             Remover
           </button>
@@ -63,10 +84,10 @@ const GridPlan = ({ plan }: Props) => {
               <h4 className={`${styles.btn}`}> </h4>
               <h4 className={`${styles.btn}`}> </h4>
             </div>
-            {item.breakfast.map((food, idx) => onRenderGridRow(food, idx))}
-            {item.lunch.map((food, idx) => onRenderGridRow(food, idx))}
-            {item.snack.map((food, idx) => onRenderGridRow(food, idx))}
-            {item.dinner.map((food, idx) => onRenderGridRow(food, idx))}
+            {item.breakfast.map((food, idx) => onRenderGridRow(food, idx, day))}
+            {item.lunch.map((food, idx) => onRenderGridRow(food, idx, day))}
+            {item.snack.map((food, idx) => onRenderGridRow(food, idx, day))}
+            {item.dinner.map((food, idx) => onRenderGridRow(food, idx, day))}
           </div>
         </div>
       ))}
