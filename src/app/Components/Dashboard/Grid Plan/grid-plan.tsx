@@ -7,12 +7,11 @@ import ActionBtn from "../Action Button/action-btn";
 import { Plus } from "lucide-react";
 
 type Props = {
-  plan: IWeeklyPlan;
   planning: IWeeklyPlan;
   setPlanning: (planning: IWeeklyPlan) => void;
 };
 
-const GridPlan = ({ plan, planning, setPlanning }: Props) => {
+const GridPlan = ({ planning, setPlanning }: Props) => {
   const haveRecipes = true;
 
   const onRemoveReceita = (id: number, day: string) => {
@@ -75,12 +74,12 @@ const GridPlan = ({ plan, planning, setPlanning }: Props) => {
 
   return (
     <div className={`${styles.grid_plan}`}>
-      {Object.entries(plan).map(([day, item]: [string, IDayPlan]) => (
+      {Object.entries(planning).map(([day, item]: [string, IDayPlan]) => (
         <div key={day} className={`${styles.grid} ${styles.grid_plan_day}`}>
           <div className={`${styles.row} ${styles.grid_header}`}>
             <p className={styles.grid_title}>{item.day}</p>
           </div>
-          {haveRecipes ? (
+          {!haveRecipes ? (
             <div className={`${styles.grid_list}`}>
               <ActionBtn
                 type="button-primary"

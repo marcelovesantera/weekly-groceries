@@ -35,11 +35,7 @@ export default function HomePage() {
               />
             </section>
             <section className={styles.grids_section}>
-              <GridPlan
-                plan={planning}
-                planning={planning}
-                setPlanning={setPlanning}
-              />
+              <GridPlan planning={planning} setPlanning={setPlanning} />
               <GridReceitas
                 receitas={receitas}
                 setReceitas={setReceitas}
