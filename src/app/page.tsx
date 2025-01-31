@@ -10,18 +10,14 @@ import GridReceitas from "./Components/Dashboard/grid-receitas";
 import { IWeeklyPlan } from "@/shared/interfaces/weeklyPlan";
 import { cleanPlan, defaultPlan } from "@/shared/database/planningDB";
 import { IFood } from "@/shared/interfaces/food";
+import ModalReceitas from "./Components/Dashboard/modal-receitas";
 
 export default function HomePage() {
   const [isLogged, setIsLogged] = useState<boolean>(true);
   console.log(setIsLogged);
   const [planning, setPlanning] = useState<IWeeklyPlan>(defaultPlan);
   const [receitas, setReceitas] = useState<IFood[]>([]);
-
-  const onClickNewPlan = () => {
-    setPlanning(cleanPlan);
-
-    onRenderDashboard(cleanPlan);
-  };
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const onRenderDashboard = (inputPlan: IWeeklyPlan) => {
     return (
@@ -35,15 +31,29 @@ export default function HomePage() {
           <ActionBtn
             type="submit"
             text="Minhas Receita"
-            onClick={() => console.log("Minhas Receita")}
+            onClick={() => setIsModalOpen(true)}
           />
         </section>
         <section className={styles.grids_section}>
-          <GridPlan plan={inputPlan} />
-          <GridReceitas receitas={receitas} setReceitas={setReceitas} />
+          <GridPlan
+            plan={inputPlan}
+            planning={planning}
+            setPlanning={setPlanning}
+          />
+          <GridReceitas
+            receitas={receitas}
+            setReceitas={setReceitas}
+            setIsModalOpen={setIsModalOpen}
+          />
         </section>
       </>
     );
+  };
+
+  const onClickNewPlan = () => {
+    setPlanning(cleanPlan);
+
+    onRenderDashboard(cleanPlan);
   };
 
   useEffect(() => {
@@ -56,6 +66,12 @@ export default function HomePage() {
         <div className={styles.page}>
           <NavigationBar />
           <div className={styles.body_div}>{onRenderDashboard(planning)}</div>
+          <ModalReceitas
+            isOpen={isModalOpen}
+            onRequestClose={() => setIsModalOpen(false)}
+            receitas={receitas}
+            setReceitas={setReceitas}
+          />
         </div>
       ) : (
         redirect("/login")
