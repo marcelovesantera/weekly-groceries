@@ -83,7 +83,7 @@ const GridPlan = ({ plan, planning, setPlanning }: Props) => {
           {haveRecipes ? (
             <div className={`${styles.grid_list}`}>
               <ActionBtn
-                type="button"
+                type="button-primary"
                 onClick={() => console.log("Adicionar Receita")}
                 icon={<Plus size={16} />}
               />
