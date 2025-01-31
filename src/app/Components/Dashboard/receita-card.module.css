@@ -1,19 +1,24 @@
-.portion {
+.receita_card {
   display: flex;
-  width: 100%;
+  justify-content: space-between;
   padding: 1rem;
   border-radius: 6px;
   background-color: #eff1f5;
 }
 
+.portion {
+  display: flex;
+  width: 100%;
+}
+
 .receita_img_div {
-  border-radius: 50% !important;
+  border-radius: 50%;
   height: 2rem;
   width: 2rem;
 }
 
 .receita_img {
-  border-radius: 50% !important;
+  border-radius: 50%;
   height: 2rem;
   width: 2rem;
   object-fit: cover;
@@ -28,13 +33,13 @@
 }
 
 .receita_title {
-  color: #2d2d2f !important;
+  color: #2d2d2f;
   font-size: 0.875em;
   font-weight: 700;
 }
 
 .portion_text {
-  color: #858796 !important;
+  color: #858796;
   font-size: 0.8em;
   font-weight: 400;
 }
@@ -55,7 +60,10 @@
   border-color: #007bff;
   border-radius: 10rem;
 
-  padding: 0.2rem 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.35rem 0.7rem;
 
   cursor: pointer;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
