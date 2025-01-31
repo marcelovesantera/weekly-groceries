@@ -1,13 +1,13 @@
 import React from "react";
-import styles from "./grid-receitas.module.css";
-import { IFood } from "@/shared/interfaces/food";
-import ReceitaCard from "./receita-card";
-import ActionBtn from "./action-btn";
+import styles from "./grid-recipes.module.css";
+import { IRecipe } from "@/shared/interfaces/recipe";
+import ReceitaCard from "../Recipe Card/recipe-card";
+import ActionBtn from "../Action Button/action-btn";
 import { Plus } from "lucide-react";
 
 type Props = {
-  receitas: IFood[];
-  setReceitas: (receitas: IFood[]) => void;
+  receitas: IRecipe[];
+  setReceitas: (receitas: IRecipe[]) => void;
   setIsModalOpen: (isOpen: boolean) => void;
 };
 

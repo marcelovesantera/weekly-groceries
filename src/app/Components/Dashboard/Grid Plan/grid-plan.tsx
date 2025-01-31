@@ -1,7 +1,7 @@
 import styles from "./grid-plan.module.css";
 import Image from "next/image";
 import { IWeeklyPlan } from "@/shared/interfaces/weeklyPlan";
-import { IFood } from "@/shared/interfaces/food";
+import { IRecipe } from "@/shared/interfaces/recipe";
 import { IDayPlan } from "@/shared/interfaces/dayPlan";
 
 type Props = {
@@ -30,7 +30,7 @@ const GridPlan = ({ plan, planning, setPlanning }: Props) => {
     setPlanning(updatedPlanning);
   };
 
-  const onRenderGridRow = (item: IFood, index: number, day: string) => {
+  const onRenderGridRow = (item: IRecipe, index: number, day: string) => {
     return (
       <div key={index} className={`${styles.row} ${styles.grid_days}`}>
         <div className={`${styles.title_div}`}>

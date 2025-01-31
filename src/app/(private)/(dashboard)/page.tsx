@@ -2,18 +2,18 @@
 
 import React, { useState } from "react";
 import styles from "./page.module.css";
-import NavigationBar from "../../Components/Dashboard/navigation-bar";
-import ActionBtn from "../../Components/Dashboard/action-btn";
-import GridPlan from "../../Components/Dashboard/grid-plan";
-import GridReceitas from "../../Components/Dashboard/grid-receitas";
+import NavigationBar from "../../Components/Dashboard/Navigation Bar/navigation-bar";
+import ActionBtn from "../../Components/Dashboard/Action Button/action-btn";
+import GridPlan from "../../Components/Dashboard/Grid Plan/grid-plan";
+import GridReceitas from "../../Components/Dashboard/Grid Recipes/grid-recipes";
 import { IWeeklyPlan } from "@/shared/interfaces/weeklyPlan";
 import { cleanPlan, defaultPlan } from "@/shared/database/planningDB";
-import { IFood } from "@/shared/interfaces/food";
-import ModalReceitas from "../../Components/Dashboard/modal-receitas";
+import { IRecipe } from "@/shared/interfaces/recipe";
+import ModalReceitas from "../../Components/Dashboard/Modal Repices/modal-recipes";
 
 export default function HomePage() {
   const [planning, setPlanning] = useState<IWeeklyPlan>(defaultPlan);
-  const [receitas, setReceitas] = useState<IFood[]>([]);
+  const [receitas, setReceitas] = useState<IRecipe[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (

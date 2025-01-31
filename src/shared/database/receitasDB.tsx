@@ -1,7 +1,7 @@
-import { IFood } from "../interfaces/food";
+import { IRecipe } from "../interfaces/recipe";
 import receitaImg from "@/app/Images/receitaRef.jpg";
 
-export const ReceitasDB: IFood[] = [
+export const ReceitasDB: IRecipe[] = [
   {
     id: 1,
     title: "Frango com Batata",

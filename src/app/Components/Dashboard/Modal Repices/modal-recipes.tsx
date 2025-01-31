@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
-import styles from "./modal-receitas.module.css";
+import styles from "./modal-recipes.module.css";
 import Modal from "react-modal";
 import Image from "next/image";
 import { ReceitasDB } from "@/shared/database/receitasDB";
-import { IFood } from "@/shared/interfaces/food";
+import { IRecipe } from "@/shared/interfaces/recipe";
 
 type Props = {
   isOpen: boolean;
   onRequestClose: () => void;
-  receitas: IFood[];
-  setReceitas: (value: IFood[]) => void;
+  receitas: IRecipe[];
+  setReceitas: (value: IRecipe[]) => void;
 };
 
 const ModalReceitas = ({
@@ -18,7 +18,7 @@ const ModalReceitas = ({
   receitas,
   setReceitas,
 }: Props) => {
-  const [receitasDB, setReceitasDB] = useState<IFood[]>([]);
+  const [receitasDB, setReceitasDB] = useState<IRecipe[]>([]);
 
   useEffect(() => {
     setReceitasDB(ReceitasDB);
@@ -39,7 +39,7 @@ const ModalReceitas = ({
     setReceitas(listaReceitas);
   };
 
-  const onRenderGridRow = (item: IFood, index: number) => {
+  const onRenderGridRow = (item: IRecipe, index: number) => {
     return (
       <div key={index} className={`${styles.row} ${styles.grid_days}`}>
         <div className={`${styles.title_div}`}>
