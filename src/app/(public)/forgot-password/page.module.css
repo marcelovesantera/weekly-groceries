@@ -1,26 +1,19 @@
 .page {
+  width: 100%;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100% !important;
-  height: 100vh;
-  background: rgb(0, 204, 255);
-  background: linear-gradient(
-    45deg,
-    rgba(0, 204, 255, 1) 0%,
-    rgba(0, 0, 102, 1) 100%
-  );
+  background-image: url("../../Images/bg_login.png");
+  background-size: cover;
+  background-position: center;
 }
 
 .container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 500px;
-  height: 300px;
-  border-radius: 0.5rem;
-  background-color: #fff;
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 1);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .form_div {
