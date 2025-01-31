@@ -3,7 +3,7 @@
   min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: start;
+  align-items: flex-start;
   background-image: url("../../Images/bg_login.png");
   background-size: cover;
   background-position: center;
