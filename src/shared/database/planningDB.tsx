@@ -58,17 +58,21 @@ export const defaultPlan: IWeeklyPlan = {
     day: "Segunda",
     breakfast: [
       {
+        id: 2,
         title: "Torrada com Ovo",
         type: "Café da Manhã",
         portions: 2,
+        portionsMax: 4,
         img: receitaImg,
       },
     ],
     lunch: [
       {
+        id: 1,
         title: "Frango com Batata",
         type: "Almoço",
         portions: 2,
+        portionsMax: 4,
         img: receitaImg,
       },
     ],
@@ -80,9 +84,11 @@ export const defaultPlan: IWeeklyPlan = {
     breakfast: [],
     lunch: [
       {
+        id: 1,
         title: "Frango com Batata",
         type: "Almoço",
         portions: 2,
+        portionsMax: 4,
         img: receitaImg,
       },
     ],
@@ -93,17 +99,21 @@ export const defaultPlan: IWeeklyPlan = {
     day: "Quarta",
     breakfast: [
       {
+        id: 2,
         title: "Torrada com Ovo",
         type: "Café da Manhã",
         portions: 2,
+        portionsMax: 4,
         img: receitaImg,
       },
     ],
     lunch: [
       {
+        id: 1,
         title: "Frango com Batata",
         type: "Almoço",
         portions: 2,
+        portionsMax: 4,
         img: receitaImg,
       },
     ],
@@ -115,9 +125,11 @@ export const defaultPlan: IWeeklyPlan = {
     breakfast: [],
     lunch: [
       {
+        id: 1,
         title: "Frango com Batata",
         type: "Almoço",
         portions: 2,
+        portionsMax: 4,
         img: receitaImg,
       },
     ],
@@ -129,9 +141,11 @@ export const defaultPlan: IWeeklyPlan = {
     breakfast: [],
     lunch: [
       {
+        id: 1,
         title: "Frango com Batata",
         type: "Almoço",
         portions: 2,
+        portionsMax: 4,
         img: receitaImg,
       },
     ],
@@ -143,9 +157,11 @@ export const defaultPlan: IWeeklyPlan = {
     breakfast: [],
     lunch: [
       {
+        id: 1,
         title: "Frango com Batata",
         type: "Almoço",
         portions: 2,
+        portionsMax: 4,
         img: receitaImg,
       },
     ],
@@ -156,17 +172,21 @@ export const defaultPlan: IWeeklyPlan = {
     day: "Domingo",
     breakfast: [
       {
+        id: 1,
         title: "Torrada com Ovo",
         type: "Café da Manhã",
         portions: 2,
+        portionsMax: 4,
         img: receitaImg,
       },
     ],
     lunch: [
       {
+        id: 1,
         title: "Frango com Batata",
         type: "Almoço",
         portions: 2,
+        portionsMax: 4,
         img: receitaImg,
       },
     ],

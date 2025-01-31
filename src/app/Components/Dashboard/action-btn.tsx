@@ -1,14 +1,19 @@
 import styles from "./action-btn.module.css";
 
 type Props = {
-  text: string;
+  type: "submit" | "button";
   onClick: () => void;
+  text?: string;
+  icon?: React.ReactNode;
 };
 
-const ActionBtn = ({ text, onClick }: Props) => {
+const ActionBtn = ({ type, onClick, text, icon }: Props) => {
+  const styleBtn = type === "submit" ? styles.btn_submit : styles.btn_action;
+
   return (
-    <button className={styles.btn_login} type="submit" onClick={onClick}>
-      {text}
+    <button className={styleBtn} onClick={onClick}>
+      {icon && <span>{icon}</span>}
+      {text && <span>{text}</span>}
     </button>
   );
 };

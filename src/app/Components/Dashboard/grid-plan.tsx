@@ -50,11 +50,10 @@ const GridPlan = ({ plan }: Props) => {
 
   return (
     <div className={`${styles.grid_plan}`}>
-      {Object.entries(plan).map(([day, item]: [string, IDayPlan], index) => (
-        <div key={index} className={`${styles.grid} ${styles.grid_plan_day}`}>
+      {Object.entries(plan).map(([day, item]: [string, IDayPlan]) => (
+        <div key={day} className={`${styles.grid} ${styles.grid_plan_day}`}>
           <div className={`${styles.row} ${styles.grid_header}`}>
-            <p className={styles.grid_title}>{day}</p>{" "}
-            {/* Exibe o nome do dia */}
+            <p className={styles.grid_title}>{item.day}</p>
           </div>
           <div className={`${styles.row} ${styles.grid_foods}`}>
             <div className={`${styles.row} ${styles.grid_columns}`}>
