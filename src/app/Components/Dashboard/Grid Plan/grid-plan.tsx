@@ -3,6 +3,8 @@ import Image from "next/image";
 import { IWeeklyPlan } from "@/shared/interfaces/weeklyPlan";
 import { IRecipe } from "@/shared/interfaces/recipe";
 import { IDayPlan } from "@/shared/interfaces/dayPlan";
+import ActionBtn from "../Action Button/action-btn";
+import { Plus } from "lucide-react";
 
 type Props = {
   plan: IWeeklyPlan;
@@ -11,6 +13,8 @@ type Props = {
 };
 
 const GridPlan = ({ plan, planning, setPlanning }: Props) => {
+  const haveRecipes = true;
+
   const onRemoveReceita = (id: number, day: string) => {
     const updatedDay: IDayPlan =
       planning[day.toLowerCase() as keyof IWeeklyPlan];
@@ -76,19 +80,31 @@ const GridPlan = ({ plan, planning, setPlanning }: Props) => {
           <div className={`${styles.row} ${styles.grid_header}`}>
             <p className={styles.grid_title}>{item.day}</p>
           </div>
-          <div className={`${styles.row} ${styles.grid_foods}`}>
-            <div className={`${styles.row} ${styles.grid_columns}`}>
-              <h4 className={`${styles.title}`}>Receita</h4>
-              <h4 className={`${styles.num_portions}`}>Porções</h4>
-              <h4 className={`${styles.type}`}>Tipo</h4>
-              <h4 className={`${styles.btn}`}> </h4>
-              <h4 className={`${styles.btn}`}> </h4>
+          {haveRecipes ? (
+            <div className={`${styles.grid_list}`}>
+              <ActionBtn
+                type="button"
+                onClick={() => console.log("Adicionar Receita")}
+                icon={<Plus size={16} />}
+              />
             </div>
-            {item.breakfast.map((food, idx) => onRenderGridRow(food, idx, day))}
-            {item.lunch.map((food, idx) => onRenderGridRow(food, idx, day))}
-            {item.snack.map((food, idx) => onRenderGridRow(food, idx, day))}
-            {item.dinner.map((food, idx) => onRenderGridRow(food, idx, day))}
-          </div>
+          ) : (
+            <div className={`${styles.row} ${styles.grid_foods}`}>
+              <div className={`${styles.row} ${styles.grid_columns}`}>
+                <h4 className={`${styles.title}`}>Receita</h4>
+                <h4 className={`${styles.num_portions}`}>Porções</h4>
+                <h4 className={`${styles.type}`}>Tipo</h4>
+                <h4 className={`${styles.btn}`}> </h4>
+                <h4 className={`${styles.btn}`}> </h4>
+              </div>
+              {item.breakfast.map((food, idx) =>
+                onRenderGridRow(food, idx, day)
+              )}
+              {item.lunch.map((food, idx) => onRenderGridRow(food, idx, day))}
+              {item.snack.map((food, idx) => onRenderGridRow(food, idx, day))}
+              {item.dinner.map((food, idx) => onRenderGridRow(food, idx, day))}
+            </div>
+          )}
         </div>
       ))}
     </div>
