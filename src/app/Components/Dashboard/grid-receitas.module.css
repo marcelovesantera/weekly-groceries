@@ -1,0 +1,29 @@
+.grid {
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+}
+
+.grid_receitas {
+  width: 30%;
+  align-self: flex-start;
+}
+
+.row {
+  width: 100%;
+}
+
+.grid_header {
+  display: flex;
+  padding: 1rem;
+  background-color: #eff1f5;
+  border-radius: 10px 10px 0px 0px;
+  border-bottom: 1px solid #e3e6f0;
+}
+
+.grid_title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: rgb(78, 115, 223);
+}

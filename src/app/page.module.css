@@ -1,7 +1,5 @@
 .page {
   width: 100%;
-  height: 100%;
-
   background-color: #f8f9fc;
 }
 
@@ -9,7 +7,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 2rem 0;
+  padding: 2rem 0;
   gap: 30px;
 }
 
@@ -25,134 +23,4 @@
   justify-content: space-between;
   gap: 30px;
   width: 90%;
-}
-
-.grid {
-  display: flex;
-  flex-direction: column;
-  border-radius: 10px;
-  box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
-}
-
-/* RECEITAS */
-.grid_receitas {
-  width: 30%;
-}
-
-/* PLANEJAMENTO */
-.grid_plan {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  gap: 2rem;
-}
-
-.grid_plan_day {
-  width: 100%;
-}
-
-.row {
-  width: 100%;
-}
-
-.grid_header {
-  display: flex;
-  padding: 1rem;
-  background-color: #eff1f5;
-  border-radius: 10px 10px 0px 0px;
-  border-bottom: 1px solid #e3e6f0;
-}
-
-.grid_title {
-  font-size: 1rem;
-  font-weight: 700;
-  color: rgb(78, 115, 223);
-}
-
-.grid_foods {
-  padding: 1rem;
-}
-
-.grid_columns {
-  display: flex;
-  width: 100%;
-  padding-bottom: 0.5rem;
-}
-
-.title {
-  width: 50%;
-}
-
-.num_portions {
-  width: 15%;
-}
-
-.type {
-  width: 20%;
-}
-
-.btn {
-  width: 10%;
-}
-
-.grid_days {
-  display: flex;
-  align-items: center;
-  padding: 1rem 0;
-  border-top: 1px solid #e3e6f0;
-}
-
-.title_div {
-  display: flex;
-  align-items: center;
-  width: 50%;
-  gap: 1rem;
-}
-
-.receita_img_div {
-  border-radius: 50%;
-  height: 2rem;
-  width: 2rem;
-}
-
-.receita_img {
-  border-radius: 50%;
-  height: 2rem;
-  width: 2rem;
-  object-fit: cover;
-}
-
-.receita_title {
-  color: #2d2d2f;
-  font-size: 0.875em;
-  font-weight: 600;
-}
-
-.portion_text {
-  color: #858796;
-  font-size: 0.875em;
-}
-
-.type_text {
-  color: #2d2d2f;
-  font-size: 0.875em;
-}
-
-.btn_edit,
-.btn_remove {
-  font-family: "Nunito", sans-serif;
-  font-size: 0.8rem;
-  font-weight: 400;
-  line-height: 1.5;
-
-  color: #fff;
-  background-color: #007bff;
-  border-color: #007bff;
-  border-radius: 10rem;
-
-  padding: 0.2rem 1rem;
-
-  cursor: pointer;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
