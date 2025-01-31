@@ -27,3 +27,10 @@
   font-weight: 700;
   color: rgb(78, 115, 223);
 }
+
+.grid_list {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  gap: 1rem;
+}

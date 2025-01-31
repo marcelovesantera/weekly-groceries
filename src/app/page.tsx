@@ -9,16 +9,33 @@ import GridPlan from "./Components/Dashboard/grid-plan";
 import GridReceitas from "./Components/Dashboard/grid-receitas";
 import { IWeeklyPlan } from "@/shared/interfaces/weeklyPlan";
 import { cleanPlan, defaultPlan } from "@/shared/database/planningDB";
+import { IFood } from "@/shared/interfaces/food";
+import receitaImg from "@/app/Images/receitaRef.jpg";
 
 export default function HomePage() {
   const [isLogged, setIsLogged] = useState<boolean>(true);
   console.log(setIsLogged);
   const [planning, setPlanning] = useState<IWeeklyPlan>(defaultPlan);
+  const [receitas, setReceitas] = useState<IFood[]>([]);
+
+  const onAddReceita = () => {
+    const listaReceitas = [...receitas];
+    const newReceita: IFood = {
+      title: "Receita Adicionada",
+      type: "Almoço",
+      portions: 2,
+      portionsMax: 4,
+      img: receitaImg,
+    };
+    listaReceitas.push(newReceita);
+
+    setReceitas(listaReceitas);
+  };
 
   const onClickNewPlan = () => {
-    const newPlan: IWeeklyPlan = cleanPlan;
-    setPlanning(newPlan);
-    onRenderDashboard(newPlan);
+    setPlanning(cleanPlan);
+
+    onRenderDashboard(cleanPlan);
   };
 
   const onRenderDashboard = (inputPlan: IWeeklyPlan) => {
@@ -30,10 +47,11 @@ export default function HomePage() {
             text="Minhas Receita"
             onClick={() => console.log("Minhas Receita")}
           />
+          <ActionBtn text="Adicionar Receita" onClick={() => onAddReceita()} />
         </section>
         <section className={styles.grids_section}>
           <GridPlan plan={inputPlan} />
-          <GridReceitas />
+          <GridReceitas receitas={receitas} />
         </section>
       </>
     );

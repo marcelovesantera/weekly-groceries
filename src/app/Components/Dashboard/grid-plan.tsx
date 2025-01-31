@@ -8,34 +8,46 @@ type Props = {
   plan: IWeeklyPlan;
 };
 
-function onRenderGridRow(item: IFood, index: number) {
-  return (
-    <div key={index} className={`${styles.row} ${styles.grid_days}`}>
-      <div className={`${styles.title_div}`}>
-        <div className={`${styles.receita_img_div}`}>
-          <Image
-            className={styles.receita_img}
-            src={item.img}
-            alt="Receita Icone"
-          />
-        </div>
-        <p className={`${styles.receita_title}`}>{item.title}</p>
-      </div>
-      <span className={`${styles.portion_text} ${styles.num_portions}`}>
-        {item.portions}x
-      </span>
-      <span className={`${styles.type_text} ${styles.type}`}>{item.type}</span>
-      <div className={`${styles.btn}`}>
-        <button className={`${styles.btn_edit}`}>Editar</button>
-      </div>
-      <div className={`${styles.btn}`}>
-        <button className={`${styles.btn_remove}`}>Remover</button>
-      </div>
-    </div>
-  );
-}
-
 const GridPlan = ({ plan }: Props) => {
+  const onRenderGridRow = (item: IFood, index: number) => {
+    return (
+      <div key={index} className={`${styles.row} ${styles.grid_days}`}>
+        <div className={`${styles.title_div}`}>
+          <div className={`${styles.receita_img_div}`}>
+            <Image
+              className={styles.receita_img}
+              src={item.img}
+              alt="Receita Icone"
+            />
+          </div>
+          <p className={`${styles.receita_title}`}>{item.title}</p>
+        </div>
+        <span className={`${styles.portion_text} ${styles.num_portions}`}>
+          {item.portions}x
+        </span>
+        <span className={`${styles.type_text} ${styles.type}`}>
+          {item.type}
+        </span>
+        <div className={`${styles.btn}`}>
+          <button
+            className={`${styles.btn_edit}`}
+            onClick={() => console.log("Editar")}
+          >
+            Editar
+          </button>
+        </div>
+        <div className={`${styles.btn}`}>
+          <button
+            className={`${styles.btn_remove}`}
+            onClick={() => console.log("Remover")}
+          >
+            Remover
+          </button>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className={`${styles.grid_plan}`}>
       {Object.entries(plan).map(([day, item]: [string, IDayPlan], index) => (
