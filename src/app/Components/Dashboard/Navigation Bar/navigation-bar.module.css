@@ -38,18 +38,18 @@
 
 .nav_user_name {
   margin-right: 10px;
-  color: #858796 !important;
+  color: #858796;
   font-size: 0.875em;
 }
 
 .nav_user_img_div {
-  border-radius: 50% !important;
+  border-radius: 50%;
   height: 2rem;
   width: 2rem;
 }
 
 .nav_user_img {
-  border-radius: 50% !important;
+  border-radius: 50%;
   height: 2rem;
   width: 2rem;
 
