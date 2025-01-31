@@ -1,6 +1,7 @@
 .receita_card {
   display: flex;
   justify-content: space-between;
+  width: 100%;
   padding: 1rem;
   border-radius: 6px;
   background-color: #eff1f5;
