@@ -1,4 +1,26 @@
-.btn_login {
+.btn_action {
+  font-family: "Nunito", sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #fff;
+
+  background-color: #007bff;
+  border-color: #007bff;
+  border-radius: 10rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 30px;
+
+  cursor: pointer;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.btn_submit {
   font-family: "Nunito", sans-serif;
   font-size: 1rem;
   font-weight: 500;
@@ -14,4 +36,13 @@
   cursor: pointer;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
     border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.btn_action,
+.btn_submit {
+  &:hover {
+    color: #fff;
+    background-color: #0056b3;
+    border-color: #0056b3;
+  }
 }

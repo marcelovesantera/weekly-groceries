@@ -1,424 +1,65 @@
 "use client";
 
 import styles from "./page.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { redirect } from "next/navigation";
 import NavigationBar from "./Components/Dashboard/navigation-bar";
 import ActionBtn from "./Components/Dashboard/action-btn";
-import Image, { StaticImageData } from "next/image";
-import receitaImg from "@/app/Images/receitaRef.jpg";
-
-type Receita = {
-  day: string;
-  receita: {
-    title: string;
-    porcoes: number;
-    img: StaticImageData;
-  };
-};
-
-type ReceitaRow = Receita[];
+import GridPlan from "./Components/Dashboard/grid-plan";
+import GridReceitas from "./Components/Dashboard/grid-receitas";
+import { IWeeklyPlan } from "@/shared/interfaces/weeklyPlan";
+import { cleanPlan, defaultPlan } from "@/shared/database/planningDB";
+import { IFood } from "@/shared/interfaces/food";
 
 export default function HomePage() {
-  const [isLogged, setIsLogged] = useState(true);
+  const [isLogged, setIsLogged] = useState<boolean>(true);
   console.log(setIsLogged);
+  const [planning, setPlanning] = useState<IWeeklyPlan>(defaultPlan);
+  const [receitas, setReceitas] = useState<IFood[]>([]);
 
-  const row1: ReceitaRow = [
-    {
-      day: "Segunda",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-    {
-      day: "Terça",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-    {
-      day: "Quarta",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-    {
-      day: "Quinta",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-    {
-      day: "Sexta",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-    {
-      day: "Sábado",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-    {
-      day: "Domingo",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-  ];
+  const onClickNewPlan = () => {
+    setPlanning(cleanPlan);
 
-  const row2: ReceitaRow = [
-    {
-      day: "Segunda",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-    {
-      day: "Terça",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-    {
-      day: "Quarta",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-    {
-      day: "Quinta",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-    {
-      day: "Sexta",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-    {
-      day: "Sábado",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-    {
-      day: "Domingo",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-  ];
-
-  const row3: ReceitaRow = [
-    {
-      day: "Segunda",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-    {
-      day: "Terça",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-    {
-      day: "Quarta",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-    {
-      day: "Quinta",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-    {
-      day: "Sexta",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-    {
-      day: "Sábado",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-    {
-      day: "Domingo",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-  ];
-
-  const row4: ReceitaRow = [
-    {
-      day: "Segunda",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-    {
-      day: "Terça",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-    {
-      day: "Quarta",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-    {
-      day: "Quinta",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-    {
-      day: "Sexta",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-    {
-      day: "Sábado",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-    {
-      day: "Domingo",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-  ];
-
-  const row5: ReceitaRow = [
-    {
-      day: "Segunda",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-    {
-      day: "Terça",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-    {
-      day: "Quarta",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-    {
-      day: "Quinta",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-    {
-      day: "Sexta",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-    {
-      day: "Sábado",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-    {
-      day: "Domingo",
-      receita: {
-        title: "Frango com batata",
-        porcoes: 2,
-        img: receitaImg,
-      },
-    },
-  ];
-
-  const plan = [row1, row2, row3, row4, row5];
-
-  const onRenderGridRow = (item: Receita, index: number) => {
-    return (
-      <div key={index} className={styles.portion}>
-        <div className={styles.receita_img_div}>
-          <Image
-            className={styles.receita_img}
-            src={item.receita.img}
-            alt="Receita Icone"
-          />
-        </div>
-        <div className={styles.receita_info_div}>
-          <p className={styles.receita_title}>{item.receita.title}</p>
-          <span
-            className={styles.portion_text}
-          >{`Porções: ${item.receita.porcoes}x`}</span>
-        </div>
-      </div>
-    );
+    onRenderDashboard(cleanPlan);
   };
 
-  const onRenderPlanning = () => {
-    const stylePortions = `${styles.row} ${styles.grid_portions}`;
-
-    return (
-      <div>
-        {plan.map((row, rowIndex) => (
-          <div key={rowIndex} className={stylePortions}>
-            {row.map((item, itemIndex) => onRenderGridRow(item, itemIndex))}
-          </div>
-        ))}
-      </div>
-    );
-  };
-
-  const onRenderGrid = () => {
-    const styleGrid = `${styles.grid} ${styles.grid_planejamento}`;
-    const styleHeader = `${styles.row} ${styles.grid_header}`;
-    const styleDays = `${styles.row} ${styles.grid_days}`;
-    const styleTitles = `${styles.row} ${styles.grid_titles}`;
-
-    return (
-      <div className={styleGrid}>
-        <div className={styleHeader}>
-          <p className={styles.grid_title}>Planejamento Semanal</p>
-        </div>
-        <div className={styleDays}>
-          <div className={styleTitles}>
-            <h4 className={styles.days}>Segunda</h4>
-            <h4 className={styles.days}>Terça</h4>
-            <h4 className={styles.days}>Quarta</h4>
-            <h4 className={styles.days}>Quinta</h4>
-            <h4 className={styles.days}>Sexta</h4>
-            <h4 className={styles.days}>Sábado</h4>
-            <h4 className={styles.days}>Domingo</h4>
-          </div>
-          {onRenderPlanning()}
-        </div>
-      </div>
-    );
-  };
-
-  const onRenderReceitas = () => {
-    const styleGrid = `${styles.grid} ${styles.grid_receitas}`;
-    const styleHeader = `${styles.row} ${styles.grid_header}`;
-
-    return (
-      <div className={styleGrid}>
-        <div className={styleHeader}>
-          <p className={styles.grid_title}>Receitas</p>
-        </div>
-      </div>
-    );
-  };
-
-  const onRenderDashboard = () => {
+  const onRenderDashboard = (inputPlan: IWeeklyPlan) => {
     return (
       <>
-        <NavigationBar />
         <section className={styles.btns_section}>
           <ActionBtn
+            type="submit"
             text="Novo Planejamento"
-            onClick={() => console.log("Novo Planejamento")}
+            onClick={onClickNewPlan}
           />
           <ActionBtn
+            type="submit"
             text="Minhas Receita"
             onClick={() => console.log("Minhas Receita")}
           />
         </section>
         <section className={styles.grids_section}>
-          {onRenderGrid()}
-          {onRenderReceitas()}
+          <GridPlan plan={inputPlan} />
+          <GridReceitas receitas={receitas} setReceitas={setReceitas} />
         </section>
       </>
     );
   };
 
+  useEffect(() => {
+    onRenderDashboard(defaultPlan);
+  }, []);
+
   return (
-    <div className={styles.body_div}>
-      {isLogged ? onRenderDashboard() : redirect("/login")}
-    </div>
+    <>
+      {isLogged ? (
+        <div className={styles.page}>
+          <NavigationBar />
+          <div className={styles.body_div}>{onRenderDashboard(planning)}</div>
+        </div>
+      ) : (
+        redirect("/login")
+      )}
+    </>
   );
 }
