@@ -6,6 +6,8 @@ const GridReceitas = () => {
       <div className={`${styles.row} ${styles.grid_header}`}>
         <p className={styles.grid_title}>Receitas</p>
       </div>
+      <div>OI</div>
+      <div>OI</div>
     </div>
   );
 };
