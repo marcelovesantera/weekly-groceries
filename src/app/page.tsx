@@ -5,212 +5,23 @@ import { useEffect, useState } from "react";
 import { redirect } from "next/navigation";
 import NavigationBar from "./Components/Dashboard/navigation-bar";
 import ActionBtn from "./Components/Dashboard/action-btn";
-import { StaticImageData } from "next/image";
-import receitaImg from "@/app/Images/receitaRef.jpg";
 import GridPlan from "./Components/Dashboard/grid-plan";
 import GridReceitas from "./Components/Dashboard/grid-receitas";
-
-type Food = {
-  title: string;
-  type: string;
-  portions: number;
-  img: StaticImageData;
-};
-
-type DayPlan = {
-  day: string;
-  breakfast: Food[];
-  lunch: Food[];
-  snack: Food[];
-  dinner: Food[];
-};
-
-const cleanPlan: DayPlan[] = [
-  {
-    day: "Segunda",
-    breakfast: [],
-    lunch: [],
-    snack: [],
-    dinner: [],
-  },
-  {
-    day: "Terça",
-    breakfast: [],
-    lunch: [],
-    snack: [],
-    dinner: [],
-  },
-  {
-    day: "Quarta",
-    breakfast: [],
-    lunch: [],
-    snack: [],
-    dinner: [],
-  },
-  {
-    day: "Quinta",
-    breakfast: [],
-    lunch: [],
-    snack: [],
-    dinner: [],
-  },
-  {
-    day: "Sexta",
-    breakfast: [],
-    lunch: [],
-    snack: [],
-    dinner: [],
-  },
-  {
-    day: "Sábado",
-    breakfast: [],
-    lunch: [],
-    snack: [],
-    dinner: [],
-  },
-  {
-    day: "Domingo",
-    breakfast: [],
-    lunch: [],
-    snack: [],
-    dinner: [],
-  },
-];
-
-const plan: DayPlan[] = [
-  {
-    day: "Segunda",
-    breakfast: [
-      {
-        title: "Torrada com Ovo",
-        type: "Café da Manhã",
-        portions: 2,
-        img: receitaImg,
-      },
-    ],
-    lunch: [
-      {
-        title: "Frango com Batata",
-        type: "Almoço",
-        portions: 2,
-        img: receitaImg,
-      },
-    ],
-    snack: [],
-    dinner: [],
-  },
-  {
-    day: "Terça",
-    breakfast: [],
-    lunch: [
-      {
-        title: "Frango com Batata",
-        type: "Almoço",
-        portions: 2,
-        img: receitaImg,
-      },
-    ],
-    snack: [],
-    dinner: [],
-  },
-  {
-    day: "Quarta",
-    breakfast: [
-      {
-        title: "Torrada com Ovo",
-        type: "Café da Manhã",
-        portions: 2,
-        img: receitaImg,
-      },
-    ],
-    lunch: [
-      {
-        title: "Frango com Batata",
-        type: "Almoço",
-        portions: 2,
-        img: receitaImg,
-      },
-    ],
-    snack: [],
-    dinner: [],
-  },
-  {
-    day: "Quinta",
-    breakfast: [],
-    lunch: [
-      {
-        title: "Frango com Batata",
-        type: "Almoço",
-        portions: 2,
-        img: receitaImg,
-      },
-    ],
-    snack: [],
-    dinner: [],
-  },
-  {
-    day: "Sexta",
-    breakfast: [],
-    lunch: [
-      {
-        title: "Frango com Batata",
-        type: "Almoço",
-        portions: 2,
-        img: receitaImg,
-      },
-    ],
-    snack: [],
-    dinner: [],
-  },
-  {
-    day: "Sábado",
-    breakfast: [],
-    lunch: [
-      {
-        title: "Frango com Batata",
-        type: "Almoço",
-        portions: 2,
-        img: receitaImg,
-      },
-    ],
-    snack: [],
-    dinner: [],
-  },
-  {
-    day: "Domingo",
-    breakfast: [
-      {
-        title: "Torrada com Ovo",
-        type: "Café da Manhã",
-        portions: 2,
-        img: receitaImg,
-      },
-    ],
-    lunch: [
-      {
-        title: "Frango com Batata",
-        type: "Almoço",
-        portions: 2,
-        img: receitaImg,
-      },
-    ],
-    snack: [],
-    dinner: [],
-  },
-];
+import { IWeeklyPlan } from "@/shared/interfaces/weeklyPlan";
+import { cleanPlan, defaultPlan } from "@/shared/database/planningDB";
 
 export default function HomePage() {
   const [isLogged, setIsLogged] = useState<boolean>(true);
   console.log(setIsLogged);
-  const [planning, setPlanning] = useState<DayPlan[]>(plan);
+  const [planning, setPlanning] = useState<IWeeklyPlan>(defaultPlan);
 
   const onClickNewPlan = () => {
-    const newPlan: DayPlan[] = cleanPlan;
+    const newPlan: IWeeklyPlan = cleanPlan;
     setPlanning(newPlan);
     onRenderDashboard(newPlan);
   };
 
-  const onRenderDashboard = (inputPlan: DayPlan[]) => {
+  const onRenderDashboard = (inputPlan: IWeeklyPlan) => {
     return (
       <>
         <section className={styles.btns_section}>
@@ -229,7 +40,7 @@ export default function HomePage() {
   };
 
   useEffect(() => {
-    onRenderDashboard(plan);
+    onRenderDashboard(defaultPlan);
   }, []);
 
   return (
