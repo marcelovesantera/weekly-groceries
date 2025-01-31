@@ -27,17 +27,8 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  gap: 1rem;
-}
-
-.close_btn {
-  margin-top: 20px;
-  padding: 10px 20px;
-  background-color: rgb(78, 115, 223);
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+  padding-top: 0.8rem;
+  border-top: 1px solid #e3e6f0;
 }
 
 .grid {
@@ -146,14 +137,16 @@
   font-size: 0.875em;
 }
 
+.close_btn,
 .btn_edit,
 .btn_remove {
   font-family: "Nunito", sans-serif;
   font-size: 0.8rem;
   font-weight: 400;
   line-height: 1.5;
-
   color: #fff;
+
+  border-style: none;
   background-color: #007bff;
   border-color: #007bff;
   border-radius: 10rem;
@@ -163,4 +156,12 @@
   cursor: pointer;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
     border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.close_btn {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 2;
+  background-color: #dc3545;
+  border-color: #dc3545;
 }

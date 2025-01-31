@@ -34,4 +34,6 @@
   align-items: center;
   padding: 1rem;
   gap: 1rem;
+  border-radius: 0px 0px 10px 10px;
+  background-color: #fff;
 }

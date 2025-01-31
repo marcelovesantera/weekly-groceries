@@ -2,8 +2,8 @@
 
 import React, { useState } from "react";
 import styles from "./page.module.css";
-import InputField from "@/app/Components/Auth/input-field";
-import SubmitBtn from "@/app/Components/Auth/submit-btn";
+import InputField from "@/app/Components/Auth/Input Field/input-field";
+import SubmitBtn from "@/app/Components/Auth/Submit Button/submit-btn";
 import Link from "next/link";
 
 type NewRegister = {
