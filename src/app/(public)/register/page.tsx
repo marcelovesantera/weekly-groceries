@@ -195,7 +195,7 @@ const RegisterPage = () => {
       }
 
       if (response.ok && resData.message === "Success.") {
-        router.push("/login");
+        router.push("/");
       }
     } catch (error: unknown) {
       alert("Erro ao validar código: " + error);
@@ -252,10 +252,14 @@ const RegisterPage = () => {
             <div className={styles.items_div}>
               <span className={styles.input_text}>WhatsApp:</span>
               <InputField
-                type="whatsapp"
-                name="whatsapp"
+                type="number"
+                name="number"
+                maxLength={11}
                 setValue={(whatsapp: string) =>
-                  setRegister({ ...register, whatsapp: Number(whatsapp) })
+                  setRegister({
+                    ...register,
+                    whatsapp: Number(whatsapp),
+                  })
                 }
               />
             </div>
