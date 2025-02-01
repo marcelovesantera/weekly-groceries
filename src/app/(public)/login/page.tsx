@@ -31,7 +31,10 @@ const LoginPage = () => {
       const resData = await response.json();
 
       if (!response.ok) {
-        throw new Error(resData.message || "Erro ao efetuar login");
+        alert(
+          resData.message + " " + resData.details || "Erro ao efetuar login"
+        );
+        return;
       }
 
       if (resData.data.token) {
@@ -44,7 +47,8 @@ const LoginPage = () => {
 
         router.push("/");
       } else {
-        throw new Error("Email ou senha inválidos");
+        alert("Email ou senha inválidos");
+        return;
       }
     } catch (error: unknown) {
       alert("Erro ao efetuar login: " + error);
