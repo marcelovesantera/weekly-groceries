@@ -27,7 +27,7 @@ const GridView = ({ dayPlan, planning, setPlanning }: Props) => {
     }
   }, []);
 
-  const onRemoveReceita = (id: number, day: string) => {
+  const onRemoveReceita = (id: string, day: string) => {
     const updatedDay: IDayPlan =
       planning[day.toLowerCase() as keyof IWeeklyPlan];
 
