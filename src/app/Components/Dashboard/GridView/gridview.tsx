@@ -53,7 +53,7 @@ const GridView = ({ dayPlan, planning, setPlanning }: Props) => {
           <div className={`${styles.receita_img_div}`}>
             <Image
               className={styles.receita_img}
-              src={item.img}
+              src={item.img || "/default-image.png"}
               alt="Receita Icone"
             />
           </div>
@@ -76,7 +76,7 @@ const GridView = ({ dayPlan, planning, setPlanning }: Props) => {
         <div className={`${styles.btn}`}>
           <button
             className={`${styles.btn_remove}`}
-            onClick={() => onRemoveReceita(item.id, day)}
+            onClick={() => item.id !== undefined && onRemoveReceita(item.id, day)}
           >
             Remover
           </button>

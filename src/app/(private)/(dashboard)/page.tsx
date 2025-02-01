@@ -10,11 +10,20 @@ import { IWeeklyPlan } from "@/shared/interfaces/weeklyPlan";
 import { cleanPlan, defaultPlan } from "@/shared/database/planningDB";
 import { IRecipe } from "@/shared/interfaces/recipe";
 import ModalReceitas from "../../Components/Dashboard/Modal Repices/modal-recipes";
+import ModalCRUDRecipe from "@/app/Components/Dashboard/Modal CRUD Recipe/modal-crud-recipe";
+
+type ModalState = {
+  modalRecipes: boolean;
+  modalCrudRecipe: boolean;
+};
 
 export default function HomePage() {
   const [planning, setPlanning] = useState<IWeeklyPlan>(defaultPlan);
   const [receitas, setReceitas] = useState<IRecipe[]>([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState<ModalState>({
+    modalRecipes: false,
+    modalCrudRecipe: false,
+  });
 
   return (
     <div className={styles.page}>
@@ -31,7 +40,9 @@ export default function HomePage() {
               <ActionBtn
                 type="submit"
                 text="Minhas Receita"
-                onClick={() => setIsModalOpen(true)}
+                onClick={() =>
+                  setIsModalOpen({ ...isModalOpen, modalRecipes: true })
+                }
               />
             </section>
             <section className={styles.grids_section}>
@@ -39,14 +50,33 @@ export default function HomePage() {
               <GridReceitas
                 receitas={receitas}
                 setReceitas={setReceitas}
+                isModalOpen={isModalOpen}
                 setIsModalOpen={setIsModalOpen}
               />
             </section>
           </>
         </div>
         <ModalReceitas
-          isOpen={isModalOpen}
-          onRequestClose={() => setIsModalOpen(false)}
+          isOpen={isModalOpen.modalRecipes}
+          onRequestClose={(atClose: string) => {
+            if (atClose === "NewRecipe") {
+              setIsModalOpen({ modalRecipes: false, modalCrudRecipe: true });
+            } else if (atClose === "Close") {
+              setIsModalOpen({ modalRecipes: false, modalCrudRecipe: false });
+            }
+          }}
+          receitas={receitas}
+          setReceitas={setReceitas}
+        />
+        <ModalCRUDRecipe
+          isOpen={isModalOpen.modalCrudRecipe}
+          onRequestClose={(atClose: string) => {
+            if (atClose === "Close") {
+              setIsModalOpen({ modalRecipes: false, modalCrudRecipe: false });
+            } else if (atClose === "MyRecipes") {
+              setIsModalOpen({ modalRecipes: true, modalCrudRecipe: false });
+            }
+          }}
           receitas={receitas}
           setReceitas={setReceitas}
         />
