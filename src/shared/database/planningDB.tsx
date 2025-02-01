@@ -58,7 +58,7 @@ export const defaultPlan: IWeeklyPlan = {
     day: "Segunda",
     breakfast: [
       {
-        id: 2,
+        id: 5,
         title: "Torrada com Ovo",
         type: "Café da Manhã",
         portions: 2,
@@ -99,7 +99,7 @@ export const defaultPlan: IWeeklyPlan = {
     day: "Quarta",
     breakfast: [
       {
-        id: 2,
+        id: 5,
         title: "Torrada com Ovo",
         type: "Café da Manhã",
         portions: 2,
@@ -172,7 +172,7 @@ export const defaultPlan: IWeeklyPlan = {
     day: "Domingo",
     breakfast: [
       {
-        id: 1,
+        id: 5,
         title: "Torrada com Ovo",
         type: "Café da Manhã",
         portions: 2,
