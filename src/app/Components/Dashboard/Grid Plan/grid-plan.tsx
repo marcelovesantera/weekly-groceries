@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "./grid-plan.module.css";
-import { IWeeklyPlan } from "@/shared/interfaces/weeklyPlan";
+import { IWeeklyPlan } from "@/app/shared/interfaces/weeklyPlan";
 import GridView from "../GridView/gridview";
-import { IDayPlan } from "@/shared/interfaces/dayPlan";
+import { IDayPlan } from "@/app/shared/interfaces/dayPlan";
 
 type Props = {
   planning: IWeeklyPlan;

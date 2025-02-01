@@ -3,7 +3,7 @@ import Modal from "react-modal";
 import styles from "./modal-crud-recipe.module.css";
 import Image, { StaticImageData } from "next/image";
 import ActionBtn from "../Action Button/action-btn";
-import { IRecipe } from "@/shared/interfaces/recipe";
+import { IRecipe } from "@/app/shared/interfaces/recipe";
 import InputField from "../Input Field/input-field";
 import { User } from "lucide-react";
 // import recipeRef from "@/app/Images/receitaRef.jpg";

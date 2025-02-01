@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import styles from "./modal-recipes.module.css";
 import Modal from "react-modal";
 import Image from "next/image";
-import { ReceitasDB } from "@/shared/database/receitasDB";
-import { IRecipe } from "@/shared/interfaces/recipe";
+import { ReceitasDB } from "@/app/shared/database/receitasDB";
+import { IRecipe } from "@/app/shared/interfaces/recipe";
 import ActionBtn from "../Action Button/action-btn";
 
 type Props = {

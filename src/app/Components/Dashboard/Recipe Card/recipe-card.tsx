@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./recipe-card.module.css";
-import { IRecipe } from "@/shared/interfaces/recipe";
+import { IRecipe } from "@/app/shared/interfaces/recipe";
 import Image from "next/image";
 import { Trash2 } from "lucide-react";
 
