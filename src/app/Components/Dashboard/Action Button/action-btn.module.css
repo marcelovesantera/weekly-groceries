@@ -21,6 +21,7 @@
     border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
+.btn_close,
 .btn_submit {
   font-family: "Nunito", sans-serif;
   font-size: 1rem;
@@ -70,4 +71,10 @@
     background-color: #0056b3;
     border-color: #0056b3;
   }
+}
+
+.btn_close {
+  background-color: #dc3545;
+  border-color: #dc3545;
+  border-style: none;
 }

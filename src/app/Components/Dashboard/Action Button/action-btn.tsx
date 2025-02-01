@@ -1,7 +1,7 @@
 import styles from "./action-btn.module.css";
 
 type Props = {
-  type: "submit" | "button" | "button-primary";
+  type: "submit" | "button" | "button-primary" | "close";
   onClick: () => void;
   text?: string;
   icon?: React.ReactNode;
@@ -13,6 +13,8 @@ const ActionBtn = ({ type, onClick, text, icon }: Props) => {
       ? styles.btn_submit
       : type === "button-primary"
       ? styles.btn_primary
+      : type === "close"
+      ? styles.btn_close
       : styles.btn_action;
 
   return (

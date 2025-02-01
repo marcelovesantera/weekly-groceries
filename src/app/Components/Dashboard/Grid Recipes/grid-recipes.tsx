@@ -5,13 +5,24 @@ import ReceitaCard from "../Recipe Card/recipe-card";
 import ActionBtn from "../Action Button/action-btn";
 import { Plus } from "lucide-react";
 
+type ModalState = {
+  modalRecipes: boolean;
+  modalCrudRecipe: boolean;
+};
+
 type Props = {
   receitas: IRecipe[];
   setReceitas: (receitas: IRecipe[]) => void;
-  setIsModalOpen: (isOpen: boolean) => void;
+  isModalOpen: ModalState;
+  setIsModalOpen: (value: ModalState) => void;
 };
 
-const GridReceitas = ({ receitas, setReceitas, setIsModalOpen }: Props) => {
+const GridReceitas = ({
+  receitas,
+  setReceitas,
+  isModalOpen,
+  setIsModalOpen,
+}: Props) => {
   const onRemoveReceita = (id: number) => {
     const updatedReceitas = receitas.filter((receita) => receita.id !== id);
     setReceitas(updatedReceitas);
@@ -26,7 +37,9 @@ const GridReceitas = ({ receitas, setReceitas, setIsModalOpen }: Props) => {
         <div className={`${styles.grid_list}`}>
           <ActionBtn
             type="button"
-            onClick={() => setIsModalOpen(true)}
+            onClick={() =>
+              setIsModalOpen({ ...isModalOpen, modalRecipes: true })
+            }
             icon={<Plus size={16} />}
           />
         </div>
