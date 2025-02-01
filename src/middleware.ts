@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { jwtVerify } from "jose";
 
 const publicRoutes = [
   { path: "/login", whenAuthenticated: "redirect" },
@@ -8,41 +9,43 @@ const publicRoutes = [
 ] as const;
 
 const REDIRECT_WHEN_NOT_AUTHENTICATED_ROUTE = "/login";
+const JWT_SECRET = new TextEncoder().encode(process.env.JWT_KEY as string);
 
-export function middleware(request: NextRequest) {
+async function verifyJWT(token: string) {
+  try {
+    await jwtVerify(token, JWT_SECRET);
+    return true;
+  } catch (error) {
+    console.error("Invalid or expired token", error);
+    return false;
+  }
+}
+
+export async function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
   const publicRoute = publicRoutes.find((route) => route.path === path);
-  const authToken = request.cookies.get("token");
+  const authToken = request.cookies.get("token")?.value;
 
-  if (!authToken && publicRoute) {
-    return NextResponse.next();
-  }
-
-  if (!authToken && !publicRoute) {
+  if (!authToken) {
+    if (publicRoute) {
+      return NextResponse.next();
+    }
     const redirectUrl = request.nextUrl.clone();
-
     redirectUrl.pathname = REDIRECT_WHEN_NOT_AUTHENTICATED_ROUTE;
-
     return NextResponse.redirect(redirectUrl);
   }
 
-  if (
-    authToken &&
-    publicRoute &&
-    publicRoute.whenAuthenticated === "redirect"
-  ) {
+  const isValidToken = await verifyJWT(authToken);
+  if (!isValidToken) {
     const redirectUrl = request.nextUrl.clone();
-
-    redirectUrl.pathname = "/";
-
+    redirectUrl.pathname = REDIRECT_WHEN_NOT_AUTHENTICATED_ROUTE;
     return NextResponse.redirect(redirectUrl);
   }
 
-  if (authToken && !publicRoute) {
-    // checar se o JWT não está expirado
-    // se estiver expirado, redirecionar para login
-
-    return NextResponse.next();
+  if (publicRoute?.whenAuthenticated === "redirect") {
+    const redirectUrl = request.nextUrl.clone();
+    redirectUrl.pathname = "/";
+    return NextResponse.redirect(redirectUrl);
   }
 
   return NextResponse.next();
@@ -50,13 +53,6 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - api (API routes)
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico, sitemap.xml, robots.txt (metadata files)
-     */
     "/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)",
   ],
 };

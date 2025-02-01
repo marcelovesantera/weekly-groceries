@@ -12,11 +12,10 @@ import { useRouter } from "next/navigation";
 const LoginPage = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+
   const router = useRouter();
 
   const onHandleLogin = async (email: string, password: string) => {
-    console.log("Login attempt:", { email, password });
-
     if (email === "" || password === "") {
       alert("Email e senha são obrigatórios");
       return;
