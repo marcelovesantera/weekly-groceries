@@ -17,8 +17,10 @@ export const connect = async () => {
 
   try {
     mongoose.connect(MONGODB_URI!, {
-      dbName: "dbaplatformapi",
+      dbName: "weeklyGroceriesDB",
       bufferCommands: true,
+      socketTimeoutMS: 30000,
+      serverSelectionTimeoutMS: 30000,
     });
     console.log("MongoDB connected successfully.");
   } catch (error: unknown) {
