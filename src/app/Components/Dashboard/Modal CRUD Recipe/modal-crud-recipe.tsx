@@ -8,6 +8,13 @@ import InputField from "../Input Field/input-field";
 import { User } from "lucide-react";
 // import recipeRef from "@/app/Images/receitaRef.jpg";
 
+const tiposRefeicao = [
+  "Café da Manhã",
+  "Almoço",
+  "Lanche da Tarde",
+  "Jantar",
+] as const;
+
 type Props = {
   isOpen: boolean;
   onRequestClose: (action: string) => void;
@@ -108,15 +115,39 @@ const ModalCRUDRecipe = ({
                   }
                 />
               </div>
-              <div className={styles.items_div}>
-                <span className={styles.input_text}>Número de Porções:</span>
-                <InputField
-                  type="text"
-                  name="portionsMax"
-                  setValue={(value: string) =>
-                    setNewRecipe({ ...newRecipe, portionsMax: parseInt(value) })
-                  }
-                />
+              <div className={styles.multi_items_div}>
+                <div className={styles.items_div}>
+                  <span className={styles.input_text}>Tipo Refeição:</span>
+                  <select
+                    className={styles.select_input}
+                    name="type"
+                    onChange={(e) =>
+                      setNewRecipe({
+                        ...newRecipe,
+                        type: e.target.value,
+                      })
+                    }
+                  >
+                    {tiposRefeicao.map((tipo) => (
+                      <option key={tipo} value={tipo}>
+                        {tipo}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div className={`${styles.items_div} ${styles.items_div_alt}`}>
+                  <span className={styles.input_text}>Porções:</span>
+                  <InputField
+                    type="text"
+                    name="portionsMax"
+                    setValue={(value: string) =>
+                      setNewRecipe({
+                        ...newRecipe,
+                        portionsMax: parseInt(value),
+                      })
+                    }
+                  />
+                </div>
               </div>
             </div>
             <div className={styles.description_div}>
