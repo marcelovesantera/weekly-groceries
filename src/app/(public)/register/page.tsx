@@ -67,6 +67,38 @@ const RegisterPage = () => {
     return false;
   };
 
+  const onValidateExistEmail = async (email: string) => {
+    try {
+      const response = await fetch("/api/check-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      const resData = await response.json();
+
+      if (!response.ok) {
+        throw new Error(resData.message || "Erro ao verificar email");
+      }
+
+      if (resData.message === "Success.") {
+        if (resData.details === "Email já existe.") {
+          return { emailExist: true, msg: resData.details };
+        } else {
+          return { emailExist: false, msg: resData.details };
+        }
+      }
+    } catch (error: unknown) {
+      alert(
+        "Erro ao verificar email: " +
+          (error instanceof Error ? error.message : "Erro desconhecido")
+      );
+      return { emailExist: true, msg: "Erro ao buscar email." };
+    }
+
+    return { emailExist: true, msg: "Erro ao buscar email." };
+  };
+
   const onSendOTP = async (email: string) => {
     try {
       const response = await fetch("/api/request-otp", {
@@ -94,8 +126,10 @@ const RegisterPage = () => {
       return;
     }
 
-    if (input.email && !onValidateInput(input.email, "email")) {
-      alert("Email inválido");
+    const email = input.email ?? "";
+    const { emailExist, msg } = await onValidateExistEmail(email);
+    if (emailExist) {
+      alert(msg);
       return;
     }
 
@@ -103,6 +137,11 @@ const RegisterPage = () => {
       alert(
         "Senha inválida: deve conter ao menos 6 caracteres, uma letra maiúscula e um caractere especial"
       );
+      return;
+    }
+
+    if (input.email && !onValidateExistEmail(input.email)) {
+      alert("Email já cadastrado");
       return;
     }
 
