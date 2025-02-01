@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import styles from "./gridview.module.css";
 import Image from "next/image";
 import ActionBtn from "../Action Button/action-btn";
-import { IDayPlan } from "@/shared/interfaces/dayPlan";
-import { IWeeklyPlan } from "@/shared/interfaces/weeklyPlan";
-import { IRecipe } from "@/shared/interfaces/recipe";
+import { IDayPlan } from "@/app/shared/interfaces/dayPlan";
+import { IWeeklyPlan } from "@/app/shared/interfaces/weeklyPlan";
+import { IRecipe } from "@/app/shared/interfaces/recipe";
 import { Plus } from "lucide-react";
 
 type Props = {
@@ -76,7 +76,9 @@ const GridView = ({ dayPlan, planning, setPlanning }: Props) => {
         <div className={`${styles.btn}`}>
           <button
             className={`${styles.btn_remove}`}
-            onClick={() => item.id !== undefined && onRemoveReceita(item.id, day)}
+            onClick={() =>
+              item.id !== undefined && onRemoveReceita(item.id, day)
+            }
           >
             Remover
           </button>

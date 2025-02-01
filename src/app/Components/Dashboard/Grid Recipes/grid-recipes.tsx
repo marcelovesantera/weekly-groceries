@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./grid-recipes.module.css";
-import { IRecipe } from "@/shared/interfaces/recipe";
+import { IRecipe } from "@/app/shared/interfaces/recipe";
 import ReceitaCard from "../Recipe Card/recipe-card";
 import ActionBtn from "../Action Button/action-btn";
 import { Plus } from "lucide-react";

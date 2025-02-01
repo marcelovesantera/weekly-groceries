@@ -6,6 +6,8 @@ type Props = {
   placeholder?: string;
   name: string;
   setValue: (value: string) => void;
+  align?: string;
+  maxLength?: number;
 };
 
 const InputField = ({
@@ -14,15 +16,19 @@ const InputField = ({
   placeholder,
   name,
   setValue,
+  align,
+  maxLength,
 }: Props) => {
+  const styleInput = !align ? styles.input : `${styles.input} ${styles.align}`;
 
   return (
     <input
-      className={styles.input}
+      className={styleInput}
       type={type}
       aria-describedby={described}
       placeholder={placeholder}
       name={name}
+      maxLength={maxLength}
       onChange={(e) => setValue(e.target.value)}
     />
   );

@@ -2,43 +2,52 @@
 
 import React, { useState } from "react";
 import styles from "./page.module.css";
+import Cookies from "js-cookie";
 import Link from "next/link";
 import InputField from "@/app/Components/Auth/Input Field/input-field";
 import SubmitBtn from "@/app/Components/Auth/Submit Button/submit-btn";
+import { IUserLoginResponse } from "@/app/shared/interfaces/user";
+import { useRouter } from "next/navigation";
 
 const LoginPage = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const emailType = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const passwordType = /^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.{6,})/;
 
-  const onValidateInput = (input: string, type: string): boolean => {
-    if (type === "email") {
-      return emailType.test(input);
-    }
+  const router = useRouter();
 
-    if (type === "password") {
-      return passwordType.test(input);
-    }
-
-    return true;
-  };
-
-  const onHandleLogin = (email: string, password: string) => {
-    console.log("Login attempt:", { email, password });
-
+  const onHandleLogin = async (email: string, password: string) => {
     if (email === "" || password === "") {
-      console.log("Email e senha são obrigatórios");
+      alert("Email e senha são obrigatórios");
       return;
     }
 
-    if (
-      onValidateInput(email, "email") &&
-      onValidateInput(password, "password")
-    ) {
-      console.log("Login efetuado com sucesso");
-    } else {
-      console.log("Email ou senha inválidos");
+    try {
+      const response = await fetch("/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const resData = await response.json();
+
+      if (!response.ok) {
+        throw new Error(resData.message || "Erro ao efetuar login");
+      }
+
+      if (resData.data.token) {
+        const userData: IUserLoginResponse = {
+          token: resData.data.token,
+          _id: resData.data._id,
+        };
+
+        Cookies.set("token", userData.token, { expires: 7, secure: true });
+
+        router.push("/");
+      } else {
+        throw new Error("Email ou senha inválidos");
+      }
+    } catch (error: unknown) {
+      alert("Erro ao efetuar login: " + error);
     }
   };
 
