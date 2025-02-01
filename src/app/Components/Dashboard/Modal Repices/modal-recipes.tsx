@@ -8,7 +8,7 @@ import ActionBtn from "../Action Button/action-btn";
 
 type Props = {
   isOpen: boolean;
-  onRequestClose: () => void;
+  onRequestClose: (action: string) => void;
   receitas: IRecipe[];
   setReceitas: (value: IRecipe[]) => void;
 };
@@ -47,7 +47,7 @@ const ModalReceitas = ({
           <div className={`${styles.receita_img_div}`}>
             <Image
               className={styles.receita_img}
-              src={item.img}
+              src={item.img || "/path/to/default/image.jpg"}
               alt="Receita Icone"
             />
           </div>
@@ -70,7 +70,7 @@ const ModalReceitas = ({
         <div className={`${styles.btn}`}>
           <button
             className={`${styles.btn_remove}`}
-            onClick={() => onAddReceita(item.id)}
+            onClick={() => item.id !== undefined && onAddReceita(item.id)}
           >
             Adicionar
           </button>
@@ -79,10 +79,13 @@ const ModalReceitas = ({
     );
   };
 
+  const onClickClose = (res: string) => {
+    onRequestClose(res);
+  };
+
   return (
     <Modal
       isOpen={isOpen}
-      onRequestClose={onRequestClose}
       className={styles.modal}
       overlayClassName={styles.overlay}
       ariaHideApp={false}
@@ -92,7 +95,7 @@ const ModalReceitas = ({
           <ActionBtn
             type="submit"
             text="Nova Receita"
-            onClick={() => console.log("oi")}
+            onClick={() => onClickClose("NewRecipe")}
           />
         </div>
         <div className={`${styles.grid} ${styles.grid_plan_day}`}>
@@ -112,7 +115,11 @@ const ModalReceitas = ({
         </div>
       </div>
       <div className={styles.modal_btns}>
-        <ActionBtn type="close" text="Fechar" onClick={onRequestClose} />
+        <ActionBtn
+          type="close"
+          text="Fechar"
+          onClick={() => onClickClose("Close")}
+        />
       </div>
     </Modal>
   );
