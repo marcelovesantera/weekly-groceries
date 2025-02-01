@@ -4,7 +4,7 @@ import { connect } from "@/app/shared/database/dbConnection";
 import { generateJWT } from "@/app/utils/generateJwt";
 import User from "@/app/shared/models/user";
 import OtpCode from "@/app/shared/models/otpCode";
-import { ICreateUser } from "@/app/shared/interfaces/user";
+import { IRegisterUser } from "@/app/shared/interfaces/user";
 
 export async function POST(request: Request) {
   try {
@@ -75,7 +75,7 @@ export async function POST(request: Request) {
 
     const hashedPassword = await bcrypt.hash(body.password, 10);
 
-    const createUser: ICreateUser = { ...body };
+    const createUser: IRegisterUser = { ...body };
 
     if (existingUser && !existingUser.isActive) {
       const tokenJWT = await generateJWT({
