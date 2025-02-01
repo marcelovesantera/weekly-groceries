@@ -3,6 +3,7 @@ import styles from "./recipe-card.module.css";
 import { IRecipe } from "@/app/shared/interfaces/recipe";
 import Image from "next/image";
 import { Trash2 } from "lucide-react";
+import receitaImgDefault from "@/app/Images/receitaRef.jpg";
 
 type Props = {
   receita: IRecipe;
@@ -15,7 +16,7 @@ const ReceitaCard = ({ receita, onRemoveReceita }: Props) => {
         <div className={styles.receita_img_div}>
           <Image
             className={styles.receita_img}
-            src={receita.img}
+            src={receita.img || receitaImgDefault}
             alt="Receita Icone"
           />
         </div>
@@ -29,7 +30,9 @@ const ReceitaCard = ({ receita, onRemoveReceita }: Props) => {
       <div className={`${styles.btn}`}>
         <button
           className={`${styles.btn_remove}`}
-          onClick={() => onRemoveReceita(receita.id)}
+          onClick={() =>
+            receita.id !== undefined && onRemoveReceita(receita.id)
+          }
         >
           <Trash2 size={16} />
         </button>
