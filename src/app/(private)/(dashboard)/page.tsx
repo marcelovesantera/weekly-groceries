@@ -6,9 +6,9 @@ import NavigationBar from "../../Components/Dashboard/Navigation Bar/navigation-
 import ActionBtn from "../../Components/Dashboard/Action Button/action-btn";
 import GridPlan from "../../Components/Dashboard/Grid Plan/grid-plan";
 import GridReceitas from "../../Components/Dashboard/Grid Recipes/grid-recipes";
-import { IWeeklyPlan } from "@/shared/interfaces/weeklyPlan";
-import { cleanPlan, defaultPlan } from "@/shared/database/planningDB";
-import { IRecipe } from "@/shared/interfaces/recipe";
+import { IWeeklyPlan } from "@/app/shared/interfaces/weeklyPlan";
+import { cleanPlan, defaultPlan } from "@/app/shared/database/planningDB";
+import { IRecipe } from "@/app/shared/interfaces/recipe";
 import ModalReceitas from "../../Components/Dashboard/Modal Repices/modal-recipes";
 import ModalCRUDRecipe from "@/app/Components/Dashboard/Modal CRUD Recipe/modal-crud-recipe";
 
