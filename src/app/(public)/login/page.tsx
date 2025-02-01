@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import styles from "./page.module.css";
+import Cookies from "js-cookie";
 import Link from "next/link";
 import InputField from "@/app/Components/Auth/Input Field/input-field";
 import SubmitBtn from "@/app/Components/Auth/Submit Button/submit-btn";
@@ -38,10 +39,9 @@ const LoginPage = () => {
         const userData: IUserLoginResponse = {
           token: resData.data.token,
           _id: resData.data._id,
-          email: resData.data.email,
         };
 
-        document.cookie = `token=${userData.token}; path=/; Secure; HttpOnly;`;
+        Cookies.set("token", userData.token, { expires: 7, secure: true });
 
         router.push("/");
       } else {

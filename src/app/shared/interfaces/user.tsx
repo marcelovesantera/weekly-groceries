@@ -24,6 +24,5 @@ export interface ILoginUser {
 
 export interface IUserLoginResponse {
   _id: string;
-  email: string;
   token: string;
 }
