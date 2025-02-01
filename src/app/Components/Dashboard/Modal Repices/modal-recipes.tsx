@@ -4,6 +4,7 @@ import Modal from "react-modal";
 import Image from "next/image";
 import { ReceitasDB } from "@/shared/database/receitasDB";
 import { IRecipe } from "@/shared/interfaces/recipe";
+import ActionBtn from "../Action Button/action-btn";
 
 type Props = {
   isOpen: boolean;
@@ -87,6 +88,13 @@ const ModalReceitas = ({
       ariaHideApp={false}
     >
       <div className={`${styles.grid_plan}`}>
+        <div className={styles.grid_actions}>
+          <ActionBtn
+            type="submit"
+            text="Nova Receita"
+            onClick={() => console.log("oi")}
+          />
+        </div>
         <div className={`${styles.grid} ${styles.grid_plan_day}`}>
           <div className={`${styles.row} ${styles.grid_header}`}>
             <p className={styles.grid_title}>Minhas Receitas</p>
@@ -104,9 +112,7 @@ const ModalReceitas = ({
         </div>
       </div>
       <div className={styles.modal_btns}>
-        <button onClick={onRequestClose} className={styles.close_btn}>
-          Fechar
-        </button>
+        <ActionBtn type="close" text="Fechar" onClick={onRequestClose} />
       </div>
     </Modal>
   );
