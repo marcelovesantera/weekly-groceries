@@ -7,7 +7,7 @@ import ActionBtn from "../../Components/Dashboard/Action Button/action-btn";
 import GridPlan from "../../Components/Dashboard/Grid Plan/grid-plan";
 import GridReceitas from "../../Components/Dashboard/Grid Recipes/grid-recipes";
 import { IWeeklyPlan } from "@/app/shared/interfaces/weeklyPlan";
-import { cleanPlan, defaultPlan } from "@/app/shared/database/planningDB";
+import { cleanPlan } from "@/app/shared/database/planningDB";
 import { IRecipe } from "@/app/shared/interfaces/recipe";
 import ModalReceitas from "../../Components/Dashboard/Modal Repices/modal-recipes";
 import ModalCRUDRecipe from "@/app/Components/Dashboard/Modal CRUD Recipe/modal-crud-recipe";
@@ -18,8 +18,9 @@ type ModalState = {
 };
 
 export default function HomePage() {
-  const [planning, setPlanning] = useState<IWeeklyPlan>(defaultPlan);
+  const [planning, setPlanning] = useState<IWeeklyPlan>(cleanPlan);
   const [receitas, setReceitas] = useState<IRecipe[]>([]);
+  const [receitasDB, setReceitasDB] = useState<IRecipe[]>([]);
   const [isModalOpen, setIsModalOpen] = useState<ModalState>({
     modalRecipes: false,
     modalCrudRecipe: false,
@@ -67,6 +68,8 @@ export default function HomePage() {
           }}
           receitas={receitas}
           setReceitas={setReceitas}
+          receitasDB={receitasDB}
+          setReceitasDB={setReceitasDB}
         />
         <ModalCRUDRecipe
           isOpen={isModalOpen.modalCrudRecipe}
@@ -77,8 +80,8 @@ export default function HomePage() {
               setIsModalOpen({ modalRecipes: true, modalCrudRecipe: false });
             }
           }}
-          receitas={receitas}
-          setReceitas={setReceitas}
+          receitasDB={receitasDB}
+          setReceitasDB={setReceitasDB}
         />
       </div>
     </div>

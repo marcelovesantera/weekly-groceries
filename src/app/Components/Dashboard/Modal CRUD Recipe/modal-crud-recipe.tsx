@@ -1,14 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 import styles from "./modal-crud-recipe.module.css";
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
+// import Image, { StaticImageData } from "next/image";
 import ActionBtn from "../Action Button/action-btn";
 import { IRecipe } from "@/app/shared/interfaces/recipe";
 import InputField from "../Input Field/input-field";
-import { User } from "lucide-react";
-// import recipeRef from "@/app/Images/receitaRef.jpg";
+// import { Upload } from "lucide-react";
+import recipeRef from "@/app/Images/receitaRef.jpg";
+import { generateFakeID } from "@/app/utils/generateFakeID";
 
 const tiposRefeicao = [
+  "",
   "Café da Manhã",
   "Almoço",
   "Lanche da Tarde",
@@ -18,50 +21,55 @@ const tiposRefeicao = [
 type Props = {
   isOpen: boolean;
   onRequestClose: (action: string) => void;
-  receitas: IRecipe[];
-  setReceitas: (value: IRecipe[]) => void;
+  receitasDB: IRecipe[];
+  setReceitasDB: (value: IRecipe[]) => void;
 };
 
 const ModalCRUDRecipe = ({
   isOpen,
   onRequestClose,
-  receitas,
-  setReceitas,
+  receitasDB,
+  setReceitasDB,
 }: Props) => {
-  const [newRecipe, setNewRecipe] = useState<IRecipe>({});
+  const [newRecipe, setNewRecipe] = useState<IRecipe>({
+    img: recipeRef,
+    type: "",
+  });
 
-  console.log(receitas, setReceitas);
-
-  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files && event.target.files[0]) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setNewRecipe({
-          ...newRecipe,
-          img: e.target?.result as string,
-        });
-      };
-      reader.readAsDataURL(event.target.files[0]);
-    }
-  };
+  // const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   if (event.target.files && event.target.files[0]) {
+  //     const reader = new FileReader();
+  //     reader.onload = (e) => {
+  //       setNewRecipe({
+  //         ...newRecipe,
+  //         img: e.target?.result as string,
+  //       });
+  //     };
+  //     reader.readAsDataURL(event.target.files[0]);
+  //   }
+  // };
 
   const onClickClose = (res: string) => {
     onRequestClose(res);
   };
 
-  function TypeOf(img: string | StaticImageData | undefined) {
-    if (typeof img === "string") {
-      return "string";
-    } else if (img && typeof img === "object" && "src" in img) {
-      return "StaticImageData";
-    } else {
-      return "undefined";
-    }
-  }
+  // function TypeOf(img: string | StaticImageData | undefined) {
+  //   if (typeof img === "string") {
+  //     return "string";
+  //   } else if (img && typeof img === "object" && "src" in img) {
+  //     return "StaticImageData";
+  //   } else {
+  //     return "undefined";
+  //   }
+  // }
 
   const onClickSaveRecipe = () => {
-    console.log("Saved");
+    setReceitasDB([...receitasDB, { ...newRecipe, id: generateFakeID() }]);
   };
+
+  useEffect(() => {
+    setNewRecipe({ img: recipeRef, type: "" });
+  }, [isOpen]);
 
   return (
     <Modal
@@ -86,22 +94,27 @@ const ModalCRUDRecipe = ({
             <div className={styles.imageUpload}>
               <label className={styles.upload_label}>
                 <div className={styles.upload_icon}>
-                  {TypeOf(newRecipe.img) === "StaticImageData" ? (
+                  {/* {TypeOf(newRecipe.img) === "StaticImageData" ? (
                     <Image
                       className={styles.image}
                       src={newRecipe.img || "/path/to/default/image.jpg"}
                       alt="Recipe Image"
                     />
                   ) : (
-                    <User size={48} />
-                  )}
+                    <Upload size={48} />
+                  )} */}
+                  <Image
+                    className={styles.image}
+                    src={newRecipe.img || "/path/to/default/image.jpg"}
+                    alt="Recipe Image"
+                  />
                 </div>
-                <input
+                {/* <input
                   className={styles.upload_input}
                   type="file"
                   accept="image/*"
                   onChange={handleImageUpload}
-                />
+                /> */}
               </label>
             </div>
             <div className={styles.inputs_div}>
@@ -144,6 +157,7 @@ const ModalCRUDRecipe = ({
                       setNewRecipe({
                         ...newRecipe,
                         portionsMax: parseInt(value),
+                        portions: parseInt(value),
                       })
                     }
                   />

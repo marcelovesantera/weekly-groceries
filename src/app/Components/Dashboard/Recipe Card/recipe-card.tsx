@@ -7,7 +7,7 @@ import receitaImgDefault from "@/app/Images/receitaRef.jpg";
 
 type Props = {
   receita: IRecipe;
-  onRemoveReceita: (id: number) => void;
+  onRemoveReceita: (id: string) => void;
 };
 const ReceitaCard = ({ receita, onRemoveReceita }: Props) => {
   return (

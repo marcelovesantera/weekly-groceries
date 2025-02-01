@@ -23,7 +23,7 @@ const GridReceitas = ({
   isModalOpen,
   setIsModalOpen,
 }: Props) => {
-  const onRemoveReceita = (id: number) => {
+  const onRemoveReceita = (id: string) => {
     const updatedReceitas = receitas.filter((receita) => receita.id !== id);
     setReceitas(updatedReceitas);
   };
