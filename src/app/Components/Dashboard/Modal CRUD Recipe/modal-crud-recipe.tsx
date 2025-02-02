@@ -23,6 +23,7 @@ type Props = {
   onRequestClose: (action: string) => void;
   receitasDB: IRecipe[];
   setReceitasDB: (value: IRecipe[]) => void;
+  receita: IRecipe;
 };
 
 const ModalCRUDRecipe = ({
@@ -30,6 +31,7 @@ const ModalCRUDRecipe = ({
   onRequestClose,
   receitasDB,
   setReceitasDB,
+  receita,
 }: Props) => {
   const [newRecipe, setNewRecipe] = useState<IRecipe>({
     img: recipeRef,
@@ -65,10 +67,15 @@ const ModalCRUDRecipe = ({
 
   const onClickSaveRecipe = () => {
     setReceitasDB([...receitasDB, { ...newRecipe, id: generateFakeID() }]);
+    onClickClose("MyRecipes");
   };
 
   useEffect(() => {
-    setNewRecipe({ img: recipeRef, type: "" });
+    if (receita.id) {
+      setNewRecipe({ ...receita, img: recipeRef });
+    } else {
+      setNewRecipe({ img: recipeRef, type: "" });
+    }
   }, [isOpen]);
 
   return (

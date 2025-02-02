@@ -8,6 +8,8 @@ import { Plus } from "lucide-react";
 type ModalState = {
   modalRecipes: boolean;
   modalCrudRecipe: boolean;
+  modalAddRecipe: boolean;
+  recipeLoad: IRecipe;
 };
 
 type Props = {
@@ -15,6 +17,7 @@ type Props = {
   setReceitas: (receitas: IRecipe[]) => void;
   isModalOpen: ModalState;
   setIsModalOpen: (value: ModalState) => void;
+  onAddReceita: (id: string) => void;
 };
 
 const GridReceitas = ({
@@ -22,6 +25,7 @@ const GridReceitas = ({
   setReceitas,
   isModalOpen,
   setIsModalOpen,
+  onAddReceita
 }: Props) => {
   const onRemoveReceita = (id: string) => {
     const updatedReceitas = receitas.filter((receita) => receita.id !== id);
@@ -50,6 +54,7 @@ const GridReceitas = ({
               key={index}
               receita={receita}
               onRemoveReceita={onRemoveReceita}
+              onAddReceita={onAddReceita}
             />
           ))}
         </div>

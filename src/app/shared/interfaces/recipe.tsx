@@ -10,4 +10,5 @@ export interface IRecipe {
   img?: string | StaticImageData;
   description?: string;
   products?: IProduct[];
+  day?: string;
 }
