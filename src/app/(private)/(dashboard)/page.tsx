@@ -11,10 +11,12 @@ import { cleanPlan } from "@/app/shared/database/planningDB";
 import { IRecipe } from "@/app/shared/interfaces/recipe";
 import ModalReceitas from "../../Components/Dashboard/Modal Repices/modal-recipes";
 import ModalCRUDRecipe from "@/app/Components/Dashboard/Modal CRUD Recipe/modal-crud-recipe";
+import ModalAddRecipe from "@/app/Components/Dashboard/Modal AddRecipe/modal-add";
 
 type ModalState = {
   modalRecipes: boolean;
   modalCrudRecipe: boolean;
+  modalAddRecipe: boolean;
   recipeLoad: IRecipe;
 };
 
@@ -25,14 +27,20 @@ export default function HomePage() {
   const [isModalOpen, setIsModalOpen] = useState<ModalState>({
     modalRecipes: false,
     modalCrudRecipe: false,
+    modalAddRecipe: false,
     recipeLoad: {} as IRecipe,
   });
 
-  // const addRecipeToDay = (day: string, recipe: IRecipe) => {
-  //   const updatedPlanning = { ...planning };
-  //   updatedPlanning[day].recipes.push(recipe);
-  //   setPlanning(updatedPlanning);
-  // };
+  const onAddReceita = (id: string) => {
+    const receita = receitasDB.find((receita) => receita.id === id);
+    if (receita) {
+      setIsModalOpen({
+        ...isModalOpen,
+        recipeLoad: receita,
+        modalAddRecipe: true,
+      });
+    }
+  };
 
   return (
     <div className={styles.page}>
@@ -61,6 +69,7 @@ export default function HomePage() {
                 setReceitas={setReceitas}
                 isModalOpen={isModalOpen}
                 setIsModalOpen={setIsModalOpen}
+                onAddReceita={onAddReceita}
               />
             </section>
           </>
@@ -113,6 +122,18 @@ export default function HomePage() {
           receita={isModalOpen.recipeLoad}
           receitasDB={receitasDB}
           setReceitasDB={setReceitasDB}
+        />
+        <ModalAddRecipe
+          isOpen={isModalOpen.modalAddRecipe}
+          onRequestClose={() =>
+            setIsModalOpen({
+              ...isModalOpen,
+              modalAddRecipe: false,
+            })
+          }
+          recipe={isModalOpen.recipeLoad}
+          planning={planning}
+          setPlanning={setPlanning}
         />
       </div>
     </div>
