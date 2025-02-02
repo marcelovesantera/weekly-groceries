@@ -8,6 +8,7 @@ import { Plus } from "lucide-react";
 type ModalState = {
   modalRecipes: boolean;
   modalCrudRecipe: boolean;
+  recipeLoad: IRecipe;
 };
 
 type Props = {

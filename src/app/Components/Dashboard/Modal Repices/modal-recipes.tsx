@@ -8,7 +8,7 @@ import ActionBtn from "../Action Button/action-btn";
 
 type Props = {
   isOpen: boolean;
-  onRequestClose: (action: string) => void;
+  onRequestClose: (action: { tipo: string; recipe: IRecipe | object }) => void;
   receitas: IRecipe[];
   setReceitas: (value: IRecipe[]) => void;
   receitasDB: IRecipe[];
@@ -42,6 +42,17 @@ const ModalReceitas = ({
     setReceitas(listaReceitas);
   };
 
+  // const onEditRecipe = (selectedReceitaId: string) => {
+  //   const selectedReceita = receitasDB.find(
+  //     (receita) => receita.id === selectedReceitaId
+  //   );
+  //   if (!selectedReceita) {
+  //     return;
+  //   }
+
+  //   onRequestClose({tipo: "EditRecipe", recipe: selectedReceita});
+  // }
+
   const onRenderGridRow = (item: IRecipe, index: number) => {
     return (
       <div key={index} className={`${styles.row} ${styles.grid_days}`}>
@@ -61,14 +72,14 @@ const ModalReceitas = ({
         <span className={`${styles.type_text} ${styles.type}`}>
           {item.type}
         </span>
-        <div className={`${styles.btn}`}>
+        {/* <div className={`${styles.btn}`}>
           <button
             className={`${styles.btn_edit}`}
-            onClick={() => console.log("Editar")}
+            onClick={() => item.id !== undefined && onEditRecipe(item.id)}
           >
             Editar
           </button>
-        </div>
+        </div> */}
         <div className={`${styles.btn}`}>
           <button
             className={`${styles.btn_remove}`}
@@ -81,7 +92,7 @@ const ModalReceitas = ({
     );
   };
 
-  const onClickClose = (res: string) => {
+  const onClickClose = (res: { tipo: string; recipe: object }) => {
     onRequestClose(res);
   };
 
@@ -97,7 +108,7 @@ const ModalReceitas = ({
           <ActionBtn
             type="submit"
             text="Nova Receita"
-            onClick={() => onClickClose("NewRecipe")}
+            onClick={() => onClickClose({ tipo: "NewRecipe", recipe: {} })}
           />
         </div>
         <div className={`${styles.grid} ${styles.grid_plan_day}`}>
@@ -120,7 +131,7 @@ const ModalReceitas = ({
         <ActionBtn
           type="close"
           text="Fechar"
-          onClick={() => onClickClose("Close")}
+          onClick={() => onClickClose({ tipo: "Close", recipe: {} })}
         />
       </div>
     </Modal>
