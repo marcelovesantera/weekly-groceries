@@ -1,3 +1,4 @@
+import { generateFakeID } from "@/app/utils/generateFakeID";
 import { IWeeklyPlan } from "../interfaces/weeklyPlan";
 import receitaImg from "@/app/Images/receitaRef.jpg";
 
@@ -58,7 +59,7 @@ export const defaultPlan: IWeeklyPlan = {
     day: "Segunda",
     breakfast: [
       {
-        id: 5,
+        id: generateFakeID(),
         title: "Torrada com Ovo",
         type: "Café da Manhã",
         portions: 2,
@@ -68,7 +69,7 @@ export const defaultPlan: IWeeklyPlan = {
     ],
     lunch: [
       {
-        id: 1,
+        id: generateFakeID(),
         title: "Frango com Batata",
         type: "Almoço",
         portions: 2,
@@ -84,7 +85,7 @@ export const defaultPlan: IWeeklyPlan = {
     breakfast: [],
     lunch: [
       {
-        id: 1,
+        id: generateFakeID(),
         title: "Frango com Batata",
         type: "Almoço",
         portions: 2,
@@ -99,7 +100,7 @@ export const defaultPlan: IWeeklyPlan = {
     day: "Quarta",
     breakfast: [
       {
-        id: 5,
+        id: generateFakeID(),
         title: "Torrada com Ovo",
         type: "Café da Manhã",
         portions: 2,
@@ -109,7 +110,7 @@ export const defaultPlan: IWeeklyPlan = {
     ],
     lunch: [
       {
-        id: 1,
+        id: generateFakeID(),
         title: "Frango com Batata",
         type: "Almoço",
         portions: 2,
@@ -125,7 +126,7 @@ export const defaultPlan: IWeeklyPlan = {
     breakfast: [],
     lunch: [
       {
-        id: 1,
+        id: generateFakeID(),
         title: "Frango com Batata",
         type: "Almoço",
         portions: 2,
@@ -141,7 +142,7 @@ export const defaultPlan: IWeeklyPlan = {
     breakfast: [],
     lunch: [
       {
-        id: 1,
+        id: generateFakeID(),
         title: "Frango com Batata",
         type: "Almoço",
         portions: 2,
@@ -157,7 +158,7 @@ export const defaultPlan: IWeeklyPlan = {
     breakfast: [],
     lunch: [
       {
-        id: 1,
+        id: generateFakeID(),
         title: "Frango com Batata",
         type: "Almoço",
         portions: 2,
@@ -172,7 +173,7 @@ export const defaultPlan: IWeeklyPlan = {
     day: "Domingo",
     breakfast: [
       {
-        id: 5,
+        id: generateFakeID(),
         title: "Torrada com Ovo",
         type: "Café da Manhã",
         portions: 2,
@@ -182,7 +183,7 @@ export const defaultPlan: IWeeklyPlan = {
     ],
     lunch: [
       {
-        id: 1,
+        id: generateFakeID(),
         title: "Frango com Batata",
         type: "Almoço",
         portions: 2,

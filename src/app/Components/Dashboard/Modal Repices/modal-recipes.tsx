@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import styles from "./modal-recipes.module.css";
 import Modal from "react-modal";
 import Image from "next/image";
@@ -11,6 +11,8 @@ type Props = {
   onRequestClose: (action: string) => void;
   receitas: IRecipe[];
   setReceitas: (value: IRecipe[]) => void;
+  receitasDB: IRecipe[];
+  setReceitasDB: (value: IRecipe[]) => void;
 };
 
 const ModalReceitas = ({
@@ -18,14 +20,14 @@ const ModalReceitas = ({
   onRequestClose,
   receitas,
   setReceitas,
+  receitasDB,
+  setReceitasDB,
 }: Props) => {
-  const [receitasDB, setReceitasDB] = useState<IRecipe[]>([]);
-
   useEffect(() => {
     setReceitasDB(ReceitasDB);
   }, []);
 
-  const onAddReceita = (selectedReceitaId: number) => {
+  const onAddReceita = (selectedReceitaId: string) => {
     const listaReceitas = [...receitas];
 
     const newReceita = receitasDB.find(

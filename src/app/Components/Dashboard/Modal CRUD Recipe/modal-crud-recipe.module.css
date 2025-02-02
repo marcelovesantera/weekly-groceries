@@ -112,7 +112,7 @@
   border-radius: 50%;
   color: rgb(78, 115, 223);
   background-color: #eff1f5;
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 
 .upload_input {
