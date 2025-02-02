@@ -1,9 +1,29 @@
+import React from "react";
 import styles from "./navigation-bar.module.css";
 import Image from "next/image";
 import userProfile from "@/app/Images/userProfile.jpg";
 import logoImg from "@/app/Images/groceries_logo.png";
+import { LogOut } from "lucide-react";
+import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
 
-const NavigationBar = () => {
+type Props = {
+  user: {
+    _id: string;
+    email: string;
+    firstName: string;
+    lastName: string;
+  };
+};
+
+const NavigationBar = ({ user }: Props) => {
+  const router = useRouter();
+
+  const onClickLogout = () => {
+    Cookies.remove("token");
+    router.push("/login");
+  };
+
   return (
     <section className={styles.nav_section}>
       <nav className={styles.nav_bar}>
@@ -14,7 +34,7 @@ const NavigationBar = () => {
           </span>
         </div>
         <div className={styles.nav_user_box}>
-          <span className={styles.nav_user_name}>Fulano Detal</span>
+          <span className={styles.nav_user_name}>{user.firstName}</span>
           <div className={styles.nav_user_img_div}>
             <Image
               className={styles.nav_user_img}
@@ -22,6 +42,9 @@ const NavigationBar = () => {
               alt="User Profile"
             />
           </div>
+          <button className={styles.btn_logout} onClick={() => onClickLogout()}>
+            <LogOut color="gray" />
+          </button>
         </div>
       </nav>
     </section>

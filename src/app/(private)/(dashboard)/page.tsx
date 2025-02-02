@@ -9,6 +9,8 @@ import GridReceitas from "../../Components/Dashboard/Grid Recipes/grid-recipes";
 import { IWeeklyPlan } from "@/app/shared/interfaces/weeklyPlan";
 import { cleanPlan } from "@/app/shared/database/planningDB";
 import { IRecipe } from "@/app/shared/interfaces/recipe";
+import useUser from "@/app/hooks/useUser";
+import { useRouter } from "next/navigation";
 import ModalReceitas from "../../Components/Dashboard/Modal Repices/modal-recipes";
 import ModalCRUDRecipe from "@/app/Components/Dashboard/Modal CRUD Recipe/modal-crud-recipe";
 
@@ -26,10 +28,22 @@ export default function HomePage() {
     modalCrudRecipe: false,
   });
 
+  const { user, loading } = useUser();
+  const router = useRouter();
+
+  if (loading) {
+    return <p>Carregando...</p>;
+  }
+
+  if (!user) {
+    router.push("/login");
+    return null;
+  }
+
   return (
     <div className={styles.page}>
       <div className={styles.page_div}>
-        <NavigationBar />
+        <NavigationBar user={user} />
         <div className={styles.body_div}>
           <>
             <section className={styles.btns_section}>
