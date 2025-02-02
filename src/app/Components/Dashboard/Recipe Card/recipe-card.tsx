@@ -2,14 +2,15 @@ import React from "react";
 import styles from "./recipe-card.module.css";
 import { IRecipe } from "@/app/shared/interfaces/recipe";
 import Image from "next/image";
-import { Trash2 } from "lucide-react";
+import { ArrowDownToDotIcon, Trash2 } from "lucide-react";
 import receitaImgDefault from "@/app/Images/receitaRef.jpg";
 
 type Props = {
   receita: IRecipe;
   onRemoveReceita: (id: string) => void;
+  onAddReceita: (id: string) => void;
 };
-const ReceitaCard = ({ receita, onRemoveReceita }: Props) => {
+const ReceitaCard = ({ receita, onRemoveReceita, onAddReceita }: Props) => {
   return (
     <div className={styles.receita_card}>
       <div className={styles.portion}>
@@ -28,6 +29,12 @@ const ReceitaCard = ({ receita, onRemoveReceita }: Props) => {
         </div>
       </div>
       <div className={`${styles.btn}`}>
+        <button
+          className={`${styles.btn_remove}`}
+          onClick={() => receita.id !== undefined && onAddReceita(receita.id)}
+        >
+          <ArrowDownToDotIcon size={16} />
+        </button>
         <button
           className={`${styles.btn_remove}`}
           onClick={() =>

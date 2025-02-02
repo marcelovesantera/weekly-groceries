@@ -7,16 +7,17 @@ import { LogOut } from "lucide-react";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 
-type Props = {
-  user: {
-    _id: string;
-    email: string;
-    firstName: string;
-    lastName: string;
-  };
-};
+// type Props = {
+//   user: {
+//     _id: string;
+//     email: string;
+//     firstName: string;
+//     lastName: string;
+//   };
+// };
 
-const NavigationBar = ({ user }: Props) => {
+// const NavigationBar = ({ user }: Props) => {
+const NavigationBar = () => {
   const router = useRouter();
 
   const onClickLogout = () => {
@@ -34,7 +35,7 @@ const NavigationBar = ({ user }: Props) => {
           </span>
         </div>
         <div className={styles.nav_user_box}>
-          <span className={styles.nav_user_name}>{user.firstName}</span>
+          <span className={styles.nav_user_name}>Fulano de Tal</span>
           <div className={styles.nav_user_img_div}>
             <Image
               className={styles.nav_user_img}

@@ -9,14 +9,15 @@ import GridReceitas from "../../Components/Dashboard/Grid Recipes/grid-recipes";
 import { IWeeklyPlan } from "@/app/shared/interfaces/weeklyPlan";
 import { cleanPlan } from "@/app/shared/database/planningDB";
 import { IRecipe } from "@/app/shared/interfaces/recipe";
-import useUser from "@/app/hooks/useUser";
-import { useRouter } from "next/navigation";
 import ModalReceitas from "../../Components/Dashboard/Modal Repices/modal-recipes";
 import ModalCRUDRecipe from "@/app/Components/Dashboard/Modal CRUD Recipe/modal-crud-recipe";
+import ModalAddRecipe from "@/app/Components/Dashboard/Modal AddRecipe/modal-add";
 
 type ModalState = {
   modalRecipes: boolean;
   modalCrudRecipe: boolean;
+  modalAddRecipe: boolean;
+  recipeLoad: IRecipe;
 };
 
 export default function HomePage() {
@@ -26,24 +27,25 @@ export default function HomePage() {
   const [isModalOpen, setIsModalOpen] = useState<ModalState>({
     modalRecipes: false,
     modalCrudRecipe: false,
+    modalAddRecipe: false,
+    recipeLoad: {} as IRecipe,
   });
 
-  const { user, loading } = useUser();
-  const router = useRouter();
-
-  if (loading) {
-    return <p>Carregando...</p>;
-  }
-
-  if (!user) {
-    router.push("/login");
-    return null;
-  }
+  const onAddReceita = (id: string) => {
+    const receita = receitasDB.find((receita) => receita.id === id);
+    if (receita) {
+      setIsModalOpen({
+        ...isModalOpen,
+        recipeLoad: receita,
+        modalAddRecipe: true,
+      });
+    }
+  };
 
   return (
     <div className={styles.page}>
       <div className={styles.page_div}>
-        <NavigationBar user={user} />
+        <NavigationBar />
         <div className={styles.body_div}>
           <>
             <section className={styles.btns_section}>
@@ -67,17 +69,32 @@ export default function HomePage() {
                 setReceitas={setReceitas}
                 isModalOpen={isModalOpen}
                 setIsModalOpen={setIsModalOpen}
+                onAddReceita={onAddReceita}
               />
             </section>
           </>
         </div>
         <ModalReceitas
           isOpen={isModalOpen.modalRecipes}
-          onRequestClose={(atClose: string) => {
-            if (atClose === "NewRecipe") {
-              setIsModalOpen({ modalRecipes: false, modalCrudRecipe: true });
-            } else if (atClose === "Close") {
-              setIsModalOpen({ modalRecipes: false, modalCrudRecipe: false });
+          onRequestClose={(atClose) => {
+            if (atClose.tipo === "NewRecipe") {
+              setIsModalOpen({
+                ...isModalOpen,
+                modalRecipes: false,
+                modalCrudRecipe: true,
+              });
+            } else if (atClose.tipo === "Close") {
+              setIsModalOpen({
+                ...isModalOpen,
+                modalRecipes: false,
+                modalCrudRecipe: false,
+              });
+            } else if (atClose.tipo === "EditRecipe") {
+              setIsModalOpen({
+                ...isModalOpen,
+                modalRecipes: false,
+                modalCrudRecipe: true,
+              });
             }
           }}
           receitas={receitas}
@@ -89,13 +106,34 @@ export default function HomePage() {
           isOpen={isModalOpen.modalCrudRecipe}
           onRequestClose={(atClose: string) => {
             if (atClose === "Close") {
-              setIsModalOpen({ modalRecipes: false, modalCrudRecipe: false });
+              setIsModalOpen({
+                ...isModalOpen,
+                modalRecipes: false,
+                modalCrudRecipe: false,
+              });
             } else if (atClose === "MyRecipes") {
-              setIsModalOpen({ modalRecipes: true, modalCrudRecipe: false });
+              setIsModalOpen({
+                ...isModalOpen,
+                modalRecipes: true,
+                modalCrudRecipe: false,
+              });
             }
           }}
+          receita={isModalOpen.recipeLoad}
           receitasDB={receitasDB}
           setReceitasDB={setReceitasDB}
+        />
+        <ModalAddRecipe
+          isOpen={isModalOpen.modalAddRecipe}
+          onRequestClose={() =>
+            setIsModalOpen({
+              ...isModalOpen,
+              modalAddRecipe: false,
+            })
+          }
+          recipe={isModalOpen.recipeLoad}
+          planning={planning}
+          setPlanning={setPlanning}
         />
       </div>
     </div>
